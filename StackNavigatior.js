@@ -12,7 +12,7 @@ import Vanhoc from "./screens/Vanhoc";
 import Product from "./screens/Product";
 import Details from "./screens/Details";
 import Login from "./screens/Login";
-import MenuDrawer from "./navigation/MenuDrawer"; 
+// import MenuDrawer from "./navigation/MenuDrawer"; 
 import BottomNavigator from "./navigation/BottomNavigator";
 import Signup from "./screens/Signup";
 import Kinhte from "./screens/Kinhte";
@@ -103,7 +103,7 @@ const MainStackNavigator = () => {
         headerShown:false
       }}>
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="MenuDrawer" component={MenuDrawer}/>
+        {/* <Stack.Screen name="MenuDrawer" component={MenuDrawer}/> */}
       </Stack.Navigator>
   
     );
