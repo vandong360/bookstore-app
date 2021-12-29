@@ -1,17 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, KeyboardAvoidingView, Keyboard, Platform } from 'react-native';
 import { Formik } from "formik";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { useState } from 'react';
-
+import axios from "axios";
+import KeyboardAvoiding from '../KeyboardAvoiding';
 
 const Signup = ({navigation}) => {
 
     const [message,setMessage] = useState();
     const [messageType, setMessageType] = useState();
-    const handleLogin = (credentials, setSubmitting) => {
+    const handleSignup = (credentials, setSubmitting) => {
         handleMessage(null);
-        const url = 'https://bookstore360.herokuapp.com/auth/login';
+        const url = 'https://bookstore360.herokuapp.com/auth/register';
 
         axios
         .post(url, credentials)
@@ -23,7 +24,7 @@ const Signup = ({navigation}) => {
                 handleMessage(message);
             }else {
                 
-                // navigation.navigate('MenuDrawer',{user});
+                navigation.navigate('Login');
                 
             }
             setSubmitting(false);
@@ -42,16 +43,28 @@ const Signup = ({navigation}) => {
 
     return(
         <View style={styles.container}>
+            <KeyboardAvoidingView 
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={{ justifyContent:'center'}}
+            >
             <View style={{height: 650,backgroundColor:'#ebb859',borderRadius: 30}}> 
                 <Text style={styles.title}>WELCOME</Text>
                 <Formik
-                initialValues={{ username: '', password:'', name:'', address:'', phone:'' }}
+                initialValues={{ username: '', password:'', name:'', address:'', phone:'', confirmPassword:'' }}
                 onSubmit={(values, {setSubmitting}) => {
-                    if (values.username == '' || values.password=='', values.name=='', values.address=='', values.phone==''){
+                    if (values.username == '' || 
+                    values.password==''|| 
+                    values.name==''|| 
+                    values.address==''|| 
+                    values.phone==''|| 
+                    values.confirmPassword==''){
                         handleMessage('Please fill all the fields');
                         setSubmitting(false);
-                    }else{
-                        handleLogin(values, setSubmitting);
+                    } else if (values.password !== values.confirmPassword) {
+                        handleMessage('Passwords do not match');
+                        setSubmitting(false);
+                    } else {
+                        handleSignup(values, setSubmitting);
                     }
                  }}
                 >
@@ -61,7 +74,7 @@ const Signup = ({navigation}) => {
                         textAlign: 'center',
                         fontSize: 15,
                         fontWeight:'bold',
-                        marginTop: 50,
+                        marginTop: 30,
                         marginBottom:20,
                         color: 'gray'
 
@@ -82,12 +95,21 @@ const Signup = ({navigation}) => {
                                 onBlur={handleBlur('name')}
                                 value={values.name}
                                 />
-                            <TextInput
+                             <TextInput
                                 style={styles.input}
                                 placeholder= 'password'
                                 onChangeText={handleChange('password')}
                                 onBlur={handleBlur('password')}
+                                secureTextEntry={true}
                                 value={values.password}
+                                />
+                            <TextInput
+                                style={styles.input}
+                                placeholder= 'Confirm Password'
+                                onChangeText={handleChange('confirmPassword')}
+                                onBlur={handleBlur('confirmPassword')}
+                                secureTextEntry={true}
+                                value={values.confirmPassword}
                                 />
                             <TextInput
                                 style={styles.input}
@@ -115,16 +137,19 @@ const Signup = ({navigation}) => {
                             {isSubmitting && <TouchableOpacity style={styles.button} disabled={true}>
                                 <ActivityIndicator size="large" color="white"></ActivityIndicator>
                             </TouchableOpacity>}
+                            <TouchableOpacity onPress={()=> navigation.navigate('Login')}>
                             <Text style={{
                                     textAlign:'center',
                                     marginTop:10,
                                     color:'#ebb859'
                             }}>Đăng nhập</Text>
+                            </TouchableOpacity>
                             </View>
                 </View>
                 )}
                 </Formik>
             </View>
+            </KeyboardAvoidingView>
         </View>
         
     );
@@ -140,7 +165,7 @@ const styles = StyleSheet.create({
 
     title: {
         color: '#FFF',
-        marginTop: 100,
+        marginTop: 90,
         textAlign: 'center',
         fontSize: 25,
         fontWeight: 'bold',
@@ -150,7 +175,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#F7F7F7',
         width: 350,
         marginHorizontal:30,
-        marginTop: 50,
+        marginTop: 10,
         borderRadius: 40,
         shadowColor: "#000",
         shadowOffset: {
@@ -169,7 +194,7 @@ const styles = StyleSheet.create({
         width: 280,
         height:50,
         backgroundColor: '#fff',
-        marginVertical:10,
+        marginVertical:7,
         marginHorizontal:30,
         borderRadius: 20,
         shadowColor: "#000",

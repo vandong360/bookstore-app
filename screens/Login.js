@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text ,StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text ,StyleSheet, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
 
 import { Formik } from "formik";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
@@ -43,6 +43,10 @@ const Login = ({navigation}) => {
 
     return(
         <View style={styles.container}>
+            <KeyboardAvoidingView
+             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+             style={{ justifyContent:'center'}}
+            >
             <View style={{height: 650,backgroundColor:'#ebb859',borderRadius: 30}}> 
                 <Text style={styles.title}>WELCOME</Text>
                 <Formik
@@ -78,10 +82,12 @@ const Login = ({navigation}) => {
                                 />
                             <TextInput
                                 style={styles.input}
+                                label = "Password"
                                 placeholder= 'password'
                                 onChangeText={handleChange('password')}
                                 onBlur={handleBlur('password')}
                                 value={values.password}
+                                secureTextEntry={true}
                                 />
                             <Text style={{
                                     textAlign:'right',
@@ -100,18 +106,20 @@ const Login = ({navigation}) => {
                             {isSubmitting && <TouchableOpacity style={styles.button} disabled={true}>
                                 <ActivityIndicator size="large" color="white"></ActivityIndicator>
                             </TouchableOpacity>}
+                            <TouchableOpacity onPress={()=> navigation.navigate('Signup')}>
                             <Text style={{
                                     textAlign:'center',
                                     marginTop:10,
                                     color:'#ebb859'
                             }}>Đăng ký</Text>
+                            </TouchableOpacity>
                             </View>
                 </View>
                 )}
                 </Formik>
             </View>
+            </KeyboardAvoidingView>
         </View>
-        
     );
 }
 

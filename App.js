@@ -15,10 +15,10 @@ import Checkout from './screens/Checkout';
 export default function App() {
   return (
   <NavigationContainer >
-    <MenuDrawer/>
-  
+    {/* <MenuDrawer/> */}
+    <LoginStackNavigator/>
    </NavigationContainer>
-
+  
   );
 }
 

@@ -9,7 +9,6 @@ const { width, height } = Dimensions.get('window')
 
 const Vanhoc = ({navigation}) =>{
 
-  // const [news, setNews] = useState([])
   const [news, setNews] = useState([]);
 
   useEffect(() => {

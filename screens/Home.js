@@ -1,40 +1,15 @@
-import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image,} from 'react-native';
 import images from '../constants/images';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TextInput } from 'react-native-gesture-handler';
-
+import newAPI from '../apis/API';
 
 
 const Home = ({route,navigation}) => {
-
-  
   // Data
-  const [trending, setTrending] = React.useState([
-    {
-      id: 0,
-      name: "Brene Brown",
-      img: images.trendingbook1,
-      type: "VĂN HỌC",
-      price: "300.000 đ"
-    },
-    {
-      id: 1,
-      name: "John James",
-      img: images.trendingbook2,
-      type: "VĂN HỌC",
-      price: "300.000 đ"
-    },
-    {
-      id: 3,
-      name: "Brene Brown",
-      img: images.trendingbook1,
-      type: "VĂN HỌC",
-      price: "300.000 đ"
-    },
-  ]);
-
-  const [bestseller, setBestseller] = React.useState([
+  const [trending, setTrending] = useState([]);
+  const [bestseller, setBestseller] = useState([
     {
       id: 0,
       name: "Of Literature and Lattes",
@@ -61,68 +36,127 @@ const Home = ({route,navigation}) => {
     },
   ]);
 
-  //render
+  
 
-  function renderTrendingShoes(trending){
+  useEffect(() => {
+      getTrendingFromAPI()
+  }, [])
 
-    const renderItem = ({item,index}) => {
-      return(
-        <TouchableOpacity style={{height:340, width:180, justifyContent: 'center', marginHorizontal:8, marginLeft:13}}
-      onPress={()=> navigation.navigate('Product')} >
 
-        <Text style={{color:'gray', fontWeight: 'bold', fontSize: 12, lineHeight: 22}}>{item.type}</Text>
-   
-        <View style={{
-          flex: 1,
-          justifyContent: 'flex-end',
-          marginTop: 8,
-          borderRadius: 10,
-          marginRight: 24,
-          // paddingLeft: 10,
-          paddingRight: 24,
-          paddingBottom: 12,
-          
-        }}>
-           <View style={{ height: '25%', paddingLeft:10, paddingTop:14 }}>
-                        <Text style={{ color: 'gray', fontSize: 16, lineHeight: 22, fontWeight: 'bold' }}>{item.name}</Text>
-                        <Text style={{ color: 'gray', fontSize: 16, lineHeight: 22, fontWeight: 'bold' }}>{item.price}</Text>
-              </View>
-        </View>
-
-        <Image 
-        source={item.img}
-            resizeMode="cover"
-            style={{
-              position: 'absolute',
-              top: 30,
-              right: 0,
-              width: "100%",
-              height: 240,
-              borderRadius:10
-              
-            }}
-        >
-        </Image>
-      </TouchableOpacity>  
-      )
-    }
-
-    return (
-      <View>
-      <Text style={{marginTop:20, marginHorizontal: 10, fontWeight: 'bold', fontSize: 16, color:'#ebb859' }}>MỚI</Text>
-      <View style={{height:350, marginTop: 12}}>
-        <FlatList horizontal
-                    showsHorizontalScrollIndicator={false}
-                    data={trending}
-                    keyExtractor={item => item.id.toString()}
-                    renderItem={renderItem}
-                    >
-        </FlatList>
-       </View>
-       </View>
-    )
+  function getTrendingFromAPI() {
+      newAPI.get('dashboard/product/trending')
+          .then(async function (response) {
+              setTrending(response.data);
+          })
+          .catch(function (error) {
+              console.log(error)
+          })
   }
 
+  if (!trending) {
+      return null
+  }
+// function renderTrending(){
+//   const renderProducts = ({item,index}) => {
+
+//     return (
+//         <View style={styles.cardView}>
+//             <TouchableOpacity onPress={()=>navigation.navigate('Details',{book: item})} >
+//             <Text style={styles.title}> {item.name}</Text>
+//             <Text style={styles.author}>{item.author} </Text>
+            
+//             {/* <Image style={styles.image} source = {{uri: item.urlToImage}}/> */}
+//             <Image style={styles.image} source={item.image ? {uri: item.image } : null}/>
+//             <View style={styles.discount}>
+//                 <Text style={{
+//                     color:'white', 
+//                     fontWeight: 'bold', 
+//                     marginVertical:13,
+//                     textAlign: 'center',
+//                     fontSize:14
+//                     }}>{item.discount}%</Text>
+//             </View>
+//             <Text style={styles.price}>{item.price} đ</Text>
+//             <Text style={styles.oldPrice}>{item.oldPrice} đ</Text>
+//             </TouchableOpacity>
+//         </View>
+//     )
+
+//   } 
+
+//   return(
+//     <FlatList data={trending.products}
+//                 numColumns={2}
+//                 keyExtractor={(item, index) => 'key' + index}
+//                 renderItem={({item,index}) => renderProducts(item,index)}
+//             />
+//   )
+// } 
+
+  // render
+
+  // function renderTrendingShoes(trending){
+    
+   
+  //   const renderItem = ({item,index}) => {
+  //     return(
+  //       <TouchableOpacity style={{height:340, width:180, justifyContent: 'center', marginHorizontal:8, marginLeft:13}}
+  //     onPress={()=> navigation.navigate('Product')} >
+
+  //       <Text style={{color:'gray', fontWeight: 'bold', fontSize: 12, lineHeight: 22}}>{item.category}</Text>
+   
+  //       <View style={{
+  //         flex: 1,
+  //         justifyContent: 'flex-end',
+  //         marginTop: 8,
+  //         borderRadius: 10,
+  //         marginRight: 24,
+  //         // paddingLeft: 10,
+  //         paddingRight: 24,
+  //         paddingBottom: 12,
+          
+  //       }}>
+  //          <View style={{ height: '25%', paddingLeft:10, paddingTop:14 }}>
+  //                       <Text style={{ color: 'gray', fontSize: 16, lineHeight: 22, fontWeight: 'bold' }}>{item.name}</Text>
+  //                       <Text style={{ color: 'gray', fontSize: 16, lineHeight: 22, fontWeight: 'bold' }}>{item.price}</Text>
+  //             </View>
+  //       </View>
+
+  //       <Image 
+  //       source={item.image ? {uri: item.image } : null}
+  //           resizeMode="cover"
+  //           style={{
+  //             position: 'absolute',
+  //             top: 30,
+  //             right: 0,
+  //             width: "100%",
+  //             height: 240,
+  //             borderRadius:10
+              
+  //           }}
+  //       >
+  //       </Image>
+  //     </TouchableOpacity>  
+  //     )
+  //   }
+
+  //   return (
+  //     <View>
+  //     <Text style={{marginTop:20, marginHorizontal: 10, fontWeight: 'bold', fontSize: 16, color:'#ebb859' }}>MỚI</Text>
+  //     <View style={{height:350, marginTop: 12}}>
+  //       <FlatList horizontal
+  //                   showsHorizontalScrollIndicator={false}
+  //                   data={trending.products}
+  //                   keyExtractor={(item,index) => 'key' + index}
+  //                   renderItem={({item,index}) => renderItem(item,index)}
+  //                   >
+  //       </FlatList>
+  //      </View>
+  //      </View>
+  //   )
+  // }
+
+  
   function renderBestSeller(bestseller){
 
     const renderItem = ({item,index}) => {
@@ -201,14 +235,17 @@ const Home = ({route,navigation}) => {
       <TextInput placeholder="Search" style={{marginLeft:10, marginVertical:10}}></TextInput>
       </View>
       
-      <View>
+      {/* <View>
          {renderTrendingShoes(trending)}
-       </View>
+       </View> */}
+       {/* <View>
+         {renderTrending()}
+       </View> */}
        
+      
        <View style={{marginLeft:12}}>
          {renderBestSeller(bestseller)}
        </View>
-       
     </View>
     
   );
