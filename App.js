@@ -8,17 +8,19 @@ import MenuDrawer from './navigation/MenuDrawer';
 import { LoginStackNavigator } from './StackNavigatior';
 import Checkout from './screens/Checkout';
 
+import { Provider } from "react-redux";
+import store from "./store/store.js";
 
 
 
 
 export default function App() {
   return (
-  <NavigationContainer >
-    {/* <MenuDrawer/> */}
-    <LoginStackNavigator/>
-   </NavigationContainer>
-  
+    <Provider store={store}>
+      <NavigationContainer>
+        <MenuDrawer />
+      </NavigationContainer>
+    </Provider>
   );
 }
 
