@@ -7,6 +7,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewProd, getHotProd } from "../store/slices/productSlice";
 
+
 const Home = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const { newProducts, hotProducts } = useSelector((state) => state.products);
@@ -21,26 +22,33 @@ const Home = ({ route, navigation }) => {
     const renderItem = ({ item, index }) => {
       return (
         <TouchableOpacity
-          style={{ height: 340, width: 180, justifyContent: "center", marginHorizontal: 8, marginLeft: 13 }}
-          onPress={() => navigation.navigate("Product")}
+          style={{ height: 350, width: 180, justifyContent: "center", 
+          marginHorizontal: 10, borderWidth:1, borderColor:"#dbdbdb", borderRadius:10 }}
+          onPress={() => navigation.navigate('Details',{book: item})}
         >
-          <Text style={{ color: "gray", fontWeight: "bold", fontSize: 12, lineHeight: 22 }}>{item.category}</Text>
+          <Text 
+          style={{ color: "gray", fontWeight: "bold", fontSize: 12, lineHeight: 22, left:5 }}>{item.category}
+          </Text>
 
           <View
             style={{
               flex: 1,
               justifyContent: "flex-end",
-              marginTop: 8,
-              borderRadius: 10,
-              marginRight: 24,
+              marginTop: 14,
               // paddingLeft: 10,
-              paddingRight: 24,
-              paddingBottom: 12,
+              paddingBottom: 10,
             }}
           >
-            <View style={{ height: "25%", paddingLeft: 10, paddingTop: 14 }}>
-              <Text style={{ color: "gray", fontSize: 16, lineHeight: 22, fontWeight: "bold" }}>{item.name}</Text>
-              <Text style={{ color: "gray", fontSize: 16, lineHeight: 22, fontWeight: "bold" }}>{item.price}</Text>
+            <View style={{ height: "25%", paddingLeft: 10, paddingTop: 8 }}>
+              <Text style={{ 
+                flex:1, color: "gray", fontSize: 14, lineHeight: 18, fontWeight: "bold", 
+                }}>{item.name}</Text>
+              <View style={{backgroundColor:"#ebb859", width:"50%", alignItems:"center", borderRadius:8}}>
+                <Text 
+                style={{ color: "white", fontSize: 14, lineHeight: 20, fontWeight: "bold", }}>
+                  {item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} đ
+                </Text>
+                </View>
             </View>
           </View>
 
@@ -50,8 +58,8 @@ const Home = ({ route, navigation }) => {
             style={{
               position: "absolute",
               top: 30,
-              right: 0,
-              width: "100%",
+              right: 3,
+              width: "95%",
               height: 240,
               borderRadius: 10,
             }}
@@ -62,7 +70,7 @@ const Home = ({ route, navigation }) => {
 
     return (
       <View>
-        <Text style={{ marginTop: 20, marginHorizontal: 10, fontWeight: "bold", fontSize: 16, color: "#ebb859" }}>
+        <Text style={{ marginTop: 30, marginHorizontal: 10, fontWeight: "bold", fontSize: 16, color: "#ebb859" }}>
           MỚI
         </Text>
         <View style={{ height: 350, marginTop: 12 }}>
@@ -83,7 +91,9 @@ const Home = ({ route, navigation }) => {
     const renderItem = ({ item, index }) => {
       return (
         <View style={{ marginVertical: 10 }}>
-          <TouchableOpacity style={{ flex: 1, flexDirection: "row" }} onPress={() => navigation.navigate("Product")}>
+          <TouchableOpacity 
+          style={{flexDirection: "row", marginLeft:10, }} 
+          onPress={() => navigation.navigate('Details',{book: item})}>
             <Image
               source={{ uri: item.image }}
               resizeMode="cover"
@@ -94,18 +104,22 @@ const Home = ({ route, navigation }) => {
               }}
             ></Image>
 
-            <View style={{ flex: 1, marginLeft: 10 }}>
+            <View style={{ flex: 1, marginLeft: 10, marginVertical:10 }}>
               <View>
                 <Text style={{ fontWeight: "bold", fontSize: 17 }}>{item.name}</Text>
-                <Text style={{ fontWeight: "bold", color: "gray", marginTop: 5 }}>{item.author}</Text>
-                <Text style={{ fontWeight: "bold", color: "gray", marginTop: 5 }}>{item.category}</Text>
-                <View style={{ flexDirection: "row", marginTop: 5 }}>
+                <Text style={{ fontWeight: "bold", color: "gray", marginTop: 10 }}>{item.author}</Text>
+                <View style={{ flexDirection: "row", marginTop: 10 }}>
                   <Ionicons name="star" size={15} color="#ebb859"></Ionicons>
                   <Ionicons name="star" size={15} color="#ebb859"></Ionicons>
                   <Ionicons name="star" size={15} color="#ebb859"></Ionicons>
                   <Ionicons name="star" size={15} color="#ebb859"></Ionicons>
                 </View>
-                <Text style={{ fontWeight: "bold", color: "gray", marginTop: 5 }}>{item.price}</Text>
+                <View 
+                style={{backgroundColor:"#ebb859", width:90, alignItems:"center", borderRadius:8, marginTop:15}}>
+                  <Text style={{ fontWeight: "bold", color: "white", marginVertical:2 }}>
+                    {item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} đ
+                  </Text>
+                  </View>
               </View>
             </View>
           </TouchableOpacity>
@@ -115,10 +129,10 @@ const Home = ({ route, navigation }) => {
 
     return (
       <View>
-        <Text style={{ marginHorizontal: 10, fontWeight: "bold", fontSize: 16, color: "#ebb859" }}>
+        <Text style={{ marginHorizontal: 10, fontWeight: "bold", fontSize: 16, color: "#ebb859", marginTop:20 }}>
           ĐÁNH GIÁ CAO NHẤT
         </Text>
-        <View style={{ height: 350, marginTop: 5 }}>
+        <View style={{ marginTop: 5, marginBottom:70 }}>
           <FlatList
             showsVerticalScrollIndicator={false}
             data={hotProducts}
@@ -154,10 +168,13 @@ const Home = ({ route, navigation }) => {
         </View>
         <TextInput placeholder="Search" style={{ marginLeft: 10, marginVertical: 10 }}></TextInput>
       </View>
+          <FlatList 
+          ListHeaderComponent={renderNewProducts(newProducts)}
+          ListFooterComponent={renderHotProducts(hotProducts)}>
+          </FlatList>
+      {/* <View>{renderNewProducts(newProducts)}</View>
 
-      <View>{renderNewProducts(newProducts)}</View>
-
-      <View style={{ marginLeft: 12 }}>{renderHotProducts(hotProducts)}</View>
+      <View style={{ marginLeft: 12 }}>{renderHotProducts(hotProducts)}</View> */}
     </View>
   );
 };
