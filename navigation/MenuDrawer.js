@@ -1,13 +1,13 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import {
+  LoginStackNavigator,
   KhoahocStackNavigator,
   VanhocStackNavigator,
-  MainStackNavigator,
   TamlyStackNavigator,
   KinhteStackNavigator,
   GiaokhoaStackNavigator,
-} from "../StackNavigatior";
+} from "../StackNavigator";
 import "react-native-gesture-handler";
 import BottomNavigator from "./BottomNavigator";
 import CustomDrawer from "./CustomDrawer";
@@ -19,8 +19,8 @@ const MenuDrawer = ({ navigation, route }) => {
   return (
     <Drawer.Navigator screenOptions={{ headerShown: false }} drawerContent={(props) => <CustomDrawer {...props} />}>
       <Drawer.Screen
-        name="HOME"
-        component={MainStackNavigator}
+        name="Trang chủ"
+        component={BottomNavigator}
         options={{
           drawerIcon: ({ color }) => <Ionicons name="home-outline" size={22} color={color} />,
         }}

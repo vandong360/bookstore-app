@@ -1,21 +1,36 @@
-import { NavigationContainer } from '@react-navigation/native';
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-
-import 'react-native-gesture-handler';
-
-import MenuDrawer from './navigation/MenuDrawer';
-import { LoginStackNavigator } from './StackNavigatior';
-import Checkout from './screens/Checkout';
-
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
+import { StyleSheet } from "react-native";
+import 'react-native-gesture-handler';
+import MenuDrawer from './navigation/MenuDrawer';
 import store from "./store/store.js";
+import Login from "./screens/Login";
+import Register from "./screens/Register";
+import BottomNavigator from "./navigation/BottomNavigator";
+
+const Stack = createStackNavigator();
+
+const RootStackNavigator = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen name="Home" component={MenuDrawer} />
+    </Stack.Navigator>
+  );
+};
 
 export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <LoginStackNavigator />
+        <RootStackNavigator />
       </NavigationContainer>
     </Provider>
   );
