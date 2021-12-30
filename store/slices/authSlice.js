@@ -1,20 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// export const register = createAsyncThunk("auth/admin/register", async ({ username, password }, thunkAPI) => {
-//   try {
-//     const response = await AuthService.register(username, password);
-
-//     if (response.success) {
-//       return response;
-//     } else return thunkAPI.rejectWithValue(response);
-//   } catch (error) {
-//     const message =
-//       (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-//     thunkAPI.dispatch(setMessage(message));
-//     return thunkAPI.rejectWithValue();
-//   }
-// });
+export const register = createAsyncThunk("auth/user/register", async ({ username, password }, thunkAPI) => {
+  try {
+    const api = "https://bookstore360.herokuapp.com/auth/register";
+    const response = await axios.post(api, { username, password });
+    if (response.data.success) {
+      return response.data;
+    } else {
+      return thunkAPI.rejectWithValue(response.data);
+    }
+  } catch (error) {
+    console.log(error);
+    return thunkAPI.rejectWithValue(error);
+  }
+});
 
 export const login = createAsyncThunk("auth/user/login", async ({ username, password }, thunkAPI) => {
   try {
@@ -63,24 +63,22 @@ export const login = createAsyncThunk("auth/user/login", async ({ username, pass
 //   }
 // });
 
-const initialState = { isAuthenticated: false, user: null, message: null};
+const initialState = { isAuthenticated: false, user: null, message: null };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   extraReducers: {
-    // [register.fulfilled]: (state, action) => {
-    //   state.isAuthenticated = true;
-    //   state.userToken = action.payload.accessToken;
-    //   state.username = action.payload.username;
-    //   state.message = null;
-    // },
-    // [register.rejected]: (state, action) => {
-    //   state.isAuthenticated = false;
-    //   state.userToken = null;
-    //   state.username = null;
-    //   state.message = action.payload.message;
-    // },
+    [register.fulfilled]: (state, action) => {
+      state.isAuthenticated = true;
+      state.user = action.payload.user;
+      state.message = action.payload.message;
+    },
+    [register.rejected]: (state, action) => {
+      state.isAuthenticated = false;
+      state.user = null;
+      state.message = action.payload.message;
+    },
 
     [login.fulfilled]: (state, action) => {
       state.isAuthenticated = true;

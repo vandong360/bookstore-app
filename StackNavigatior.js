@@ -12,9 +12,9 @@ import Vanhoc from "./screens/Vanhoc";
 import Product from "./screens/Product";
 import Details from "./screens/Details";
 import Login from "./screens/Login";
+import Register from "./screens/Register";
 // import MenuDrawer from "./navigation/MenuDrawer";
 import BottomNavigator from "./navigation/BottomNavigator";
-import Signup from "./screens/Signup";
 import Kinhte from "./screens/Kinhte";
 import Tamly from "./screens/Tamly";
 import Giaokhoa from "./screens/Giaokhoa";
@@ -113,7 +113,8 @@ const LoginStackNavigator = () => {
       }}
     >
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Home" component={Home}/>
+      <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
   );
 };

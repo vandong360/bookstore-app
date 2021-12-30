@@ -16,7 +16,6 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <LoginStackNavigator />
-        {/* <MenuDrawer /> */}
       </NavigationContainer>
     </Provider>
   );

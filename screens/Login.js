@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-
+import { View, Button, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { Formik } from "formik";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import KeyboardAvoiding from "../KeyboardAvoiding";
@@ -11,7 +10,6 @@ const Login = ({ navigation }) => {
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
   const dispatch = useDispatch();
-
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   if (isAuthenticated) {
@@ -27,6 +25,10 @@ const Login = ({ navigation }) => {
       console.log(response.payload.message);
     }
     setSubmitting(false);
+  };
+
+  const handleRegister = () => {
+    navigation.navigate("Register");
   };
 
   const handleMessage = (message, type = "FAILED") => {
@@ -109,15 +111,17 @@ const Login = ({ navigation }) => {
                     <ActivityIndicator size="large" color="white"></ActivityIndicator>
                   </TouchableOpacity>
                 )}
-                <Text
-                  style={{
-                    textAlign: "center",
-                    marginTop: 10,
-                    color: "#ebb859",
-                  }}
-                >
-                  Đăng ký
-                </Text>
+                <TouchableOpacity onPress={handleRegister}>
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      marginTop: 10,
+                      color: "#ebb859",
+                    }}
+                  >
+                    Đăng ký
+                  </Text>
+                </TouchableOpacity>
               </View>
             </View>
           )}
