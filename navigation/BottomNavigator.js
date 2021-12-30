@@ -21,9 +21,16 @@ const BottomNavigator = () => {
           tabBarStyle:{
             position: 'absolute',
             backgroundColor: '#ebb859',
-            borderRadius: 20,
-            bottom: 10,
-            marginHorizontal: 16
+            bottom:0,
+            left:0,
+            right:0,
+            elevation:0,
+            height:60,
+            borderTopRightRadius:10,
+            borderTopLeftRadius:10,
+            // borderRadius: 20,
+            // bottom: 10,
+            // marginHorizontal: 16,
           }
         }}
         >
