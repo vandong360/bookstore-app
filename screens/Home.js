@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from "react-native";
 import images from "../constants/images";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
   },
   search: {
     flexDirection: "row",
-    width: 385,
+    width: "95%",
     height: 40,
     borderColor: "#dbdbdb",
     borderWidth: 1,
