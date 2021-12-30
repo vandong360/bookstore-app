@@ -1,9 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from "@reduxjs/toolkit";
 import productsReducer from "./slices/productSlice";
+import authReducer from "./slices/authSlice";
 
 const reducer = {
+  auth: authReducer,
   products: productsReducer,
-}
+};
+
 const store = configureStore({
   reducer: reducer,
   devTools: true,
@@ -11,14 +14,12 @@ const store = configureStore({
 
 export default store;
 
-
-//folder tree: 
-    //slides
-    //thunks
-    //selectors
+//folder tree:
+//slides
+//thunks
+//selectors
 
 // or normal way:
-    //actions
-    //reducers
-    //types
-    
+//actions
+//reducers
+//types

@@ -11,14 +11,12 @@ import Checkout from './screens/Checkout';
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 
-
-
-
 export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <MenuDrawer />
+        <LoginStackNavigator />
+        {/* <MenuDrawer /> */}
       </NavigationContainer>
     </Provider>
   );
@@ -27,6 +25,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
   },
 });

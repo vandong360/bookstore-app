@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from "react-native";
 import images from "../constants/images";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -15,33 +15,6 @@ const Home = ({ route, navigation }) => {
     dispatch(getNewProd());
     dispatch(getHotProd());
   }, []);
-
-  const [bestseller, setBestseller] = React.useState([
-    {
-      id: 0,
-      name: "Of Literature and Lattes",
-      img: images.bestseller1,
-      author: "Katherine Reay",
-      type: "Văn Học",
-      price: "350.000 đ",
-    },
-    {
-      id: 1,
-      name: "Because of Winn-Dixie: An Instructional Guide for Literature",
-      img: images.bestseller2,
-      author: "Tracy Pearce",
-      type: "Văn Học",
-      price: "300.000 đ",
-    },
-    {
-      id: 3,
-      name: "The Dine Reader: An Anthology of Navajo Literature",
-      author: "Esther G.Belin ",
-      img: images.bestseller3,
-      type: "Văn Học",
-      price: "350.000 đ",
-    },
-  ]);
 
   //component new book
   function renderNewProducts(newProducts) {
@@ -197,7 +170,7 @@ const styles = StyleSheet.create({
   },
   search: {
     flexDirection: "row",
-    width: 385,
+    width: "95%",
     height: 40,
     borderColor: "#dbdbdb",
     borderWidth: 1,
