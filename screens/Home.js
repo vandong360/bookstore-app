@@ -7,6 +7,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewProd, getHotProd } from "../store/slices/productSlice";
 
+import Rating from "../Components/rating";
 
 const Home = ({ route, navigation }) => {
   const dispatch = useDispatch();
@@ -108,12 +109,9 @@ const Home = ({ route, navigation }) => {
               <View>
                 <Text style={{ fontWeight: "bold", fontSize: 17 }}>{item.name}</Text>
                 <Text style={{ fontWeight: "bold", color: "gray", marginTop: 10 }}>{item.author}</Text>
-                <View style={{ flexDirection: "row", marginTop: 10 }}>
-                  <Ionicons name="star" size={15} color="#ebb859"></Ionicons>
-                  <Ionicons name="star" size={15} color="#ebb859"></Ionicons>
-                  <Ionicons name="star" size={15} color="#ebb859"></Ionicons>
-                  <Ionicons name="star" size={15} color="#ebb859"></Ionicons>
-                </View>
+                <Rating
+                rating={item.rating}
+                > </Rating>
                 <View 
                 style={{backgroundColor:"#ebb859", width:90, alignItems:"center", borderRadius:8, marginTop:15}}>
                   <Text style={{ fontWeight: "bold", color: "white", marginVertical:2 }}>
