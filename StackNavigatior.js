@@ -30,6 +30,7 @@ const MainStackNavigator = () => {
     >
       <Stack.Screen name="HomeScreens" component={BottomNavigator} />
       <Stack.Screen name="Product" component={Product} />
+      <Stack.Screen name="Details" component={Details} />
     </Stack.Navigator>
   );
 };
