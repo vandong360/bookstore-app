@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const register = createAsyncThunk("auth/user/register", async ({ username, password }, thunkAPI) => {
+export const register = createAsyncThunk("auth/user/register", async ({ values }, thunkAPI) => {
   try {
     const api = "https://bookstore360.herokuapp.com/auth/register";
-    const response = await axios.post(api, { username, password });
+    const response = await axios.post(api, values);
     if (response.data.success) {
       return response.data;
     } else {

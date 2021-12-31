@@ -9,7 +9,6 @@ import Profile from "./screens/Profile";
 import Setting from "./screens/Setting";
 import Khoahoc from "./screens/Khoahoc";
 import Vanhoc from "./screens/Vanhoc";
-import Product from "./screens/Product";
 import Details from "./screens/Details";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
@@ -27,7 +26,7 @@ const MainStackNavigator = () => {
       }}
     >
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Product" component={Product} />
+      <Stack.Screen name="Details" component={Details} />
     </Stack.Navigator>
   );
 };

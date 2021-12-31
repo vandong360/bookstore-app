@@ -10,10 +10,9 @@ const Register = ({ navigation }) => {
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state) => state.auth);
 
-  const handleSignup = async (credentials, setSubmitting) => {
-    const response = await dispatch(register(credentials));
+  const handleSignup = async (values, setSubmitting) => {
+    const response = await dispatch(register({values}));
 
     if (response.payload.success) {
       navigation.navigate("Home");
@@ -53,6 +52,7 @@ const Register = ({ navigation }) => {
                 handleMessage("Passwords do not match");
                 setSubmitting(false);
               } else {
+                delete values.confirmPassword;
                 handleSignup(values, setSubmitting);
               }
             }}

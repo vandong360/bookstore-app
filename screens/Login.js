@@ -12,9 +12,11 @@ const Login = ({ navigation }) => {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.auth);
 
-  if (isAuthenticated) {
-    navigation.navigate("Home");
-  }
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      navigation.navigate("Home");
+    }
+  }, []);
 
   const handleLogin = async (credentials, setSubmitting) => {
     const response = await dispatch(login(credentials));

@@ -7,7 +7,7 @@ import images from "../constants/images";
 import Cart from "../screens/Cart";
 import Profile from "../screens/Profile";
 import Setting from "../screens/Setting";
-import { MainStackNavigator } from "../StackNavigator";
+import { LoginStackNavigator, MainStackNavigator } from "../StackNavigator";
 
 const Tab = createBottomTabNavigator();
 
