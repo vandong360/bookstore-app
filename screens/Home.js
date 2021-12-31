@@ -23,12 +23,19 @@ const Home = ({ route, navigation }) => {
     const renderItem = ({ item, index }) => {
       return (
         <TouchableOpacity
-          style={{ height: 350, width: 180, justifyContent: "center", 
-          marginHorizontal: 10, borderWidth:1, borderColor:"#dbdbdb", borderRadius:10 }}
-          onPress={() => navigation.navigate('Details',{book: item})}
+          style={{
+            height: 350,
+            width: 180,
+            justifyContent: "center",
+            marginHorizontal: 10,
+            borderWidth: 1,
+            borderColor: "#dbdbdb",
+            borderRadius: 10,
+          }}
+          onPress={() => navigation.navigate("Details", { book: item })}
         >
-          <Text 
-          style={{ color: "gray", fontWeight: "bold", fontSize: 12, lineHeight: 22, left:5 }}>{item.category}
+          <Text style={{ color: "gray", fontWeight: "bold", fontSize: 12, lineHeight: 22, left: 5 }}>
+            {item.category}
           </Text>
 
           <View
@@ -41,15 +48,22 @@ const Home = ({ route, navigation }) => {
             }}
           >
             <View style={{ height: "25%", paddingLeft: 10, paddingTop: 8 }}>
-              <Text style={{ 
-                flex:1, color: "gray", fontSize: 14, lineHeight: 18, fontWeight: "bold", 
-                }}>{item.name}</Text>
-              <View style={{backgroundColor:"#ebb859", width:"50%", alignItems:"center", borderRadius:8}}>
-                <Text 
-                style={{ color: "white", fontSize: 14, lineHeight: 20, fontWeight: "bold", }}>
-                  {item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} đ
+              <Text
+                style={{
+                  flex: 1,
+                  color: "gray",
+                  fontSize: 14,
+                  lineHeight: 18,
+                  fontWeight: "bold",
+                }}
+              >
+                {item.name}
+              </Text>
+              <View style={{ backgroundColor: "#ebb859", width: "50%", alignItems: "center", borderRadius: 8 }}>
+                <Text style={{ color: "white", fontSize: 14, lineHeight: 20, fontWeight: "bold" }}>
+                  {item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
                 </Text>
-                </View>
+              </View>
             </View>
           </View>
 
@@ -92,9 +106,10 @@ const Home = ({ route, navigation }) => {
     const renderItem = ({ item, index }) => {
       return (
         <View style={{ marginVertical: 10 }}>
-          <TouchableOpacity 
-          style={{flexDirection: "row", marginLeft:10, }} 
-          onPress={() => navigation.navigate('Details',{book: item})}>
+          <TouchableOpacity
+            style={{ flexDirection: "row", marginLeft: 10 }}
+            onPress={() => navigation.navigate("Details", { book: item })}
+          >
             <Image
               source={{ uri: item.image }}
               resizeMode="cover"
@@ -105,19 +120,24 @@ const Home = ({ route, navigation }) => {
               }}
             ></Image>
 
-            <View style={{ flex: 1, marginLeft: 10, marginVertical:10 }}>
+            <View style={{ flex: 1, marginLeft: 10, marginVertical: 10 }}>
               <View>
                 <Text style={{ fontWeight: "bold", fontSize: 17 }}>{item.name}</Text>
                 <Text style={{ fontWeight: "bold", color: "gray", marginTop: 10 }}>{item.author}</Text>
-                <Rating
-                rating={item.rating}
-                > </Rating>
-                <View 
-                style={{backgroundColor:"#ebb859", width:90, alignItems:"center", borderRadius:8, marginTop:15}}>
-                  <Text style={{ fontWeight: "bold", color: "white", marginVertical:2 }}>
-                    {item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} đ
+                <Rating rating={item.rating}> </Rating>
+                <View
+                  style={{
+                    backgroundColor: "#ebb859",
+                    width: 90,
+                    alignItems: "center",
+                    borderRadius: 8,
+                    marginTop: 15,
+                  }}
+                >
+                  <Text style={{ fontWeight: "bold", color: "white", marginVertical: 2 }}>
+                    {item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
                   </Text>
-                  </View>
+                </View>
               </View>
             </View>
           </TouchableOpacity>
@@ -127,10 +147,10 @@ const Home = ({ route, navigation }) => {
 
     return (
       <View>
-        <Text style={{ marginHorizontal: 10, fontWeight: "bold", fontSize: 16, color: "#ebb859", marginTop:20 }}>
+        <Text style={{ marginHorizontal: 10, fontWeight: "bold", fontSize: 16, color: "#ebb859", marginTop: 20 }}>
           ĐÁNH GIÁ CAO NHẤT
         </Text>
-        <View style={{ marginTop: 5, marginBottom:70 }}>
+        <View style={{ marginTop: 5, marginBottom: 70 }}>
           <FlatList
             showsVerticalScrollIndicator={false}
             data={hotProducts}
@@ -166,10 +186,10 @@ const Home = ({ route, navigation }) => {
         </View>
         <TextInput placeholder="Search" style={{ marginLeft: 10, marginVertical: 10 }}></TextInput>
       </View>
-          <FlatList 
-          ListHeaderComponent={renderNewProducts(newProducts)}
-          ListFooterComponent={renderHotProducts(hotProducts)}>
-          </FlatList>
+      <FlatList
+        ListHeaderComponent={renderNewProducts(newProducts)}
+        ListFooterComponent={renderHotProducts(hotProducts)}
+      ></FlatList>
       {/* <View>{renderNewProducts(newProducts)}</View>
 
       <View style={{ marginLeft: 12 }}>{renderHotProducts(hotProducts)}</View> */}

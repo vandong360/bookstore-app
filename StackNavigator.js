@@ -13,8 +13,6 @@ import Product from "./screens/Product";
 import Details from "./screens/Details";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
-// import MenuDrawer from "./navigation/MenuDrawer";
-import BottomNavigator from "./navigation/BottomNavigator";
 import Kinhte from "./screens/Kinhte";
 import Tamly from "./screens/Tamly";
 import Giaokhoa from "./screens/Giaokhoa";
@@ -28,7 +26,7 @@ const MainStackNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="HomeScreens" component={BottomNavigator} />
+      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Product" component={Product} />
       <Stack.Screen name="Details" component={Details} />
     </Stack.Navigator>
