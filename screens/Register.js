@@ -4,7 +4,7 @@ import { Formik } from "formik";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import KeyboardAvoiding from "../KeyboardAvoiding";
 import { register } from "../store/slices/authSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Register = ({ navigation }) => {
   const [message, setMessage] = useState();
@@ -14,9 +14,7 @@ const Register = ({ navigation }) => {
   const handleSignup = async (values, setSubmitting) => {
     const response = await dispatch(register({values}));
 
-    if (response.payload.success) {
-      navigation.navigate("Home");
-    } else {
+    if (!response.payload.success) {
       console.log(response.payload.message);
     }
     setSubmitting(false);
