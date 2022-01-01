@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const register = createAsyncThunk("auth/user/register", async ({ username, password }, thunkAPI) => {
+export const register = createAsyncThunk("auth/user/register", async ({ values }, thunkAPI) => {
   try {
     const api = "https://bookstore360.herokuapp.com/auth/register";
-    const response = await axios.post(api, { username, password });
+    const response = await axios.post(api, values);
     if (response.data.success) {
       return response.data;
     } else {
@@ -31,9 +31,10 @@ export const login = createAsyncThunk("auth/user/login", async ({ username, pass
   }
 });
 
-// export const logout = createAsyncThunk("logout", async () => {
-//   await AuthService.logout(LOCAL_STORAGE_ADMIN_TOKEN, LOCAL_STORAGE_ADMIN_NAME);
-// });
+export const logout = createAsyncThunk("logout", (thunkAPI) => {
+  const Logout = false
+  return Logout;
+});
 
 // export const getAllUser = createAsyncThunk("dashboard/users/", async (thunkAPI) => {
 //   try {
@@ -92,11 +93,10 @@ const authSlice = createSlice({
       state.message = action.payload.message;
     },
 
-    // [logout.fulfilled]: (state) => {
-    //   state.isAuthenticated = false;
-    //   state.userToken = null;
-    //   state.username = null;
-    // },
+    [logout.fulfilled]: (state, action) => {
+      state.isAuthenticated = false;
+      state.user = null;
+    },
 
     // [getAllUser.fulfilled]: (state, action) => {
     //   state.allUser = action.payload.users;

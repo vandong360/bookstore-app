@@ -9,7 +9,6 @@ import Profile from "./screens/Profile";
 import Setting from "./screens/Setting";
 import Khoahoc from "./screens/Khoahoc";
 import Vanhoc from "./screens/Vanhoc";
-import Product from "./screens/Product";
 import Details from "./screens/Details";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
@@ -19,6 +18,14 @@ import Giaokhoa from "./screens/Giaokhoa";
 
 const Stack = createStackNavigator();
 
+const DetailsStackNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Detail" component={Details} />
+    </Stack.Navigator>
+  );
+};
+
 const MainStackNavigator = () => {
   return (
     <Stack.Navigator
@@ -27,11 +34,16 @@ const MainStackNavigator = () => {
       }}
     >
       <Stack.Screen name="Home" component={Home} />
+<<<<<<< HEAD
       <Stack.Screen name="Product" component={Product} />
+=======
+>>>>>>> c31451c9fece594c293bc708f034950cd361f688
       <Stack.Screen name="Details" component={Details} />
     </Stack.Navigator>
   );
 };
+
+
 
 const CartStackNavigator = () => {
   return (
@@ -104,22 +116,8 @@ const VanhocStackNavigator = () => {
   );
 };
 
-const LoginStackNavigator = () => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="Home" component={Home} />
-    </Stack.Navigator>
-  );
-};
 
 export {
-  LoginStackNavigator,
   MainStackNavigator,
   CartStackNavigator,
   ProfileStackNavigator,

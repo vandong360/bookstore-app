@@ -18,6 +18,39 @@ const Home = ({ route, navigation }) => {
     dispatch(getHotProd());
   }, []);
 
+  const convertCategory = (category) => {
+    switch (category) {
+      case "khoa-hoc": {
+        return "Khoa Học";
+        break;
+      }
+      case "van-hoc": {
+        return "Văn Học";
+        break;
+      }
+      case "giao-khoa": {
+        return "Giáo Khoa";
+        break;
+      }
+      case "tam-ly": {
+        return "Tâm Lý";
+        break;
+      }
+      case "thieu-nhi": {
+        return "Thiếu Nhi";
+        break;
+      }
+      case "kinh-te": {
+        return "Kinh Tế";
+        break;
+      }
+      case "lap-trinh": {
+        return "Lập Trình";
+        break;
+      }
+    }
+  }
+
   //component new book
   function renderNewProducts(newProducts) {
     const renderItem = ({ item, index }) => {
@@ -35,7 +68,7 @@ const Home = ({ route, navigation }) => {
           onPress={() => navigation.navigate("Details", { book: item })}
         >
           <Text style={{ color: "gray", fontWeight: "bold", fontSize: 12, lineHeight: 22, left: 5 }}>
-            {item.category}
+            {convertCategory(item.category)}
           </Text>
 
           <View

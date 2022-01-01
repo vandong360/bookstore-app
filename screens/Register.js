@@ -4,20 +4,17 @@ import { Formik } from "formik";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import KeyboardAvoiding from "../KeyboardAvoiding";
 import { register } from "../store/slices/authSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Register = ({ navigation }) => {
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state) => state.auth);
 
-  const handleSignup = async (credentials, setSubmitting) => {
-    const response = await dispatch(register(credentials));
+  const handleSignup = async (values, setSubmitting) => {
+    const response = await dispatch(register({values}));
 
-    if (response.payload.success) {
-      navigation.navigate("Home");
-    } else {
+    if (!response.payload.success) {
       console.log(response.payload.message);
     }
     setSubmitting(false);
@@ -53,6 +50,7 @@ const Register = ({ navigation }) => {
                 handleMessage("Passwords do not match");
                 setSubmitting(false);
               } else {
+                delete values.confirmPassword;
                 handleSignup(values, setSubmitting);
               }
             }}

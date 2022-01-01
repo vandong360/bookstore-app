@@ -10,18 +10,11 @@ const Login = ({ navigation }) => {
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state) => state.auth);
-
-  if (isAuthenticated) {
-    navigation.navigate("Home");
-  }
 
   const handleLogin = async (credentials, setSubmitting) => {
     const response = await dispatch(login(credentials));
 
-    if (response.payload.success) {
-      navigation.navigate("Home");
-    } else {
+    if (!response.payload.success) {
       console.log(response.payload.message);
     }
     setSubmitting(false);

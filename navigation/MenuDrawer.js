@@ -1,7 +1,6 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import {
-  LoginStackNavigator,
   KhoahocStackNavigator,
   VanhocStackNavigator,
   TamlyStackNavigator,
