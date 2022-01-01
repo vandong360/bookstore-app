@@ -26,17 +26,20 @@ const CustomDrawer = (props) => {
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: "#ebb859" }}>
         <Image source={images.avtDrawer} style={imgStyle} />
-        <Text style={{ color: "white", fontSize: 18, marginLeft: 15 }}>Xin chào {user ? user.name : 'Khách' }!</Text>
-        <TouchableOpacity onPress={handleLogout}>
-          <Text>
-            Đăng Xuất
-          </Text>
-        </TouchableOpacity>
+        <Text style={{ color: "white", fontSize: 16, marginLeft: 15 }}>Xin chào {user ? user.name : 'Khách' }!</Text>
         <View style={{ flex: 1, backgroundColor: "white", paddingTop: 10 }}>
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
+      <TouchableOpacity onPress={handleLogout}>
+          <View style={{flexDirection:'row', marginLeft:10, marginBottom:20 }}>
+          <Image source={images.logout}
+          style={{width:17, height:17, marginHorizontal:5, marginTop:4,  tintColor:"#226AD6"}}></Image>
+          <Text style={{fontSize:17, color:"#226AD6"}}>Đăng xuất</Text>
+          </View>
+        </TouchableOpacity>
     </View>
+    
   );
 };
 

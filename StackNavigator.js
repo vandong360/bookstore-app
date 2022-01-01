@@ -15,6 +15,7 @@ import Register from "./screens/Register";
 import Kinhte from "./screens/Kinhte";
 import Tamly from "./screens/Tamly";
 import Giaokhoa from "./screens/Giaokhoa";
+import BottomNavigator from "./navigation/BottomNavigator";
 
 const Stack = createStackNavigator();
 
@@ -26,18 +27,14 @@ const DetailsStackNavigator = () => {
   );
 };
 
-const MainStackNavigator = () => {
+const MainStackNavigator = ({ route, navigation }) => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
-<<<<<<< HEAD
-      <Stack.Screen name="Product" component={Product} />
-=======
->>>>>>> c31451c9fece594c293bc708f034950cd361f688
+      <Stack.Screen name="Home" component={BottomNavigator} />
       <Stack.Screen name="Details" component={Details} />
     </Stack.Navigator>
   );

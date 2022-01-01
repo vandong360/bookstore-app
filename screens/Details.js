@@ -7,8 +7,7 @@ const Details = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <TouchableOpacity style={{ marginTop: 10, backgroundColor: "#fff" }} onPress={() => navigation.goBack()}>
+       <TouchableOpacity style={{ marginTop: 10, backgroundColor: "#fff" }} onPress={() => navigation.goBack()}>
           <Text>
             <Ionicons name="arrow-back" size={20} color="black"></Ionicons>
           </Text>
@@ -23,14 +22,14 @@ const Details = ({ route, navigation }) => {
           {book.author}
         </Text>
         <Text style={{ marginTop: 10, marginHorizontal: 10, fontWeight: "bold", fontSize: 18, color: "#ebb859" }}>
-          {book.price} đ
+          {book.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
         </Text>
 
         <View
           style={{
             flexDirection: "row",
             height: 90,
-            marginTop: 50,
+            marginVertical:20,
             backgroundColor: "#fff",
             paddingTop: 20,
             marginHorizontal: 18,
@@ -56,10 +55,10 @@ const Details = ({ route, navigation }) => {
             </Text>
           </View>
         </View>
-
-        <Text style={{ marginTop: 20, marginHorizontal: 18, fontSize: 14, color: "gray" }}>{book.description}</Text>
-
-        <View style={{ flexDirection: "row", height: 90, marginTop: 50, paddingTop: 20, marginHorizontal: 16 }}>
+        <ScrollView style={{height:150}}>
+        <Text style={{ marginTop: 10, marginHorizontal: 18, fontSize: 14, color: "gray" }}>{book.description}</Text>
+        </ScrollView>
+      <View style={{ flexDirection: "row", height: 90, marginTop: 10, paddingTop: 20, marginHorizontal: 16 }}>
           <View
             style={{
               flexDirection: "row",
@@ -94,7 +93,6 @@ const Details = ({ route, navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-      </ScrollView>
     </View>
   );
 };

@@ -10,6 +10,7 @@ import { getNewProd, getHotProd } from "../store/slices/productSlice";
 import Rating from "../Components/rating";
 
 const Home = ({ route, navigation }) => {
+  
   const dispatch = useDispatch();
   const { newProducts, hotProducts } = useSelector((state) => state.products);
 

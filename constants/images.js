@@ -13,7 +13,8 @@ export const trendingbook2 = require ("../images/imgtrending2.jpg");
 export const bestseller1 = require("../images/bestseller1.jpg");
 export const bestseller2 = require("../images/bestseller2.jpg"); 
 export const bestseller3 = require("../images/bestseller3.jpg");
-export const star = require("../images/star.png")  
+export const star = require("../images/star.png");
+export const logout = require("../images/logout.png")  
 
 export default{
     trendingbook1,
@@ -31,5 +32,6 @@ export default{
     bestseller1,
     bestseller2,
     bestseller3,
-    star
+    star,
+    logout
 }

@@ -6,6 +6,7 @@ import {
   TamlyStackNavigator,
   KinhteStackNavigator,
   GiaokhoaStackNavigator,
+  MainStackNavigator,
 } from "../StackNavigator";
 import "react-native-gesture-handler";
 import BottomNavigator from "./BottomNavigator";
@@ -19,7 +20,7 @@ const MenuDrawer = ({ navigation, route }) => {
     <Drawer.Navigator screenOptions={{ headerShown: false }} drawerContent={(props) => <CustomDrawer {...props} />}>
       <Drawer.Screen
         name="Trang chủ"
-        component={BottomNavigator}
+        component={MainStackNavigator}
         options={{
           drawerIcon: ({ color }) => <Ionicons name="home-outline" size={22} color={color} />,
         }}

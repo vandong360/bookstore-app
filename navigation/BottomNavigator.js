@@ -8,6 +8,7 @@ import Cart from "../screens/Cart";
 import Profile from "../screens/Profile";
 import Setting from "../screens/Setting";
 import { LoginStackNavigator, MainStackNavigator } from "../StackNavigator";
+import Home from "../screens/Home";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,12 +27,12 @@ const screenOption = {
         }
       }
 
-const BottomNavigator = () => {
+const BottomNavigator = ({navigation,route}) => {
   return (
     <Tab.Navigator screenOptions={screenOption}>
       <Tab.Screen
         name="Trang Chủ"
-        component={MainStackNavigator}
+        component={Home}
         options={{
           tabBarIcon: ({ focused }) => {
             return (
