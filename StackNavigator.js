@@ -18,6 +18,14 @@ import Giaokhoa from "./screens/Giaokhoa";
 
 const Stack = createStackNavigator();
 
+const DetailsStackNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Detail" component={Details} />
+    </Stack.Navigator>
+  );
+};
+
 const MainStackNavigator = () => {
   return (
     <Stack.Navigator
@@ -30,6 +38,8 @@ const MainStackNavigator = () => {
     </Stack.Navigator>
   );
 };
+
+
 
 const CartStackNavigator = () => {
   return (
@@ -102,22 +112,8 @@ const VanhocStackNavigator = () => {
   );
 };
 
-const LoginStackNavigator = () => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="Home" component={Home} />
-    </Stack.Navigator>
-  );
-};
 
 export {
-  LoginStackNavigator,
   MainStackNavigator,
   CartStackNavigator,
   ProfileStackNavigator,

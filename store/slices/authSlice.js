@@ -31,9 +31,10 @@ export const login = createAsyncThunk("auth/user/login", async ({ username, pass
   }
 });
 
-// export const logout = createAsyncThunk("logout", async () => {
-//   await AuthService.logout(LOCAL_STORAGE_ADMIN_TOKEN, LOCAL_STORAGE_ADMIN_NAME);
-// });
+export const logout = createAsyncThunk("logout", (thunkAPI) => {
+  const Logout = false
+  return Logout;
+});
 
 // export const getAllUser = createAsyncThunk("dashboard/users/", async (thunkAPI) => {
 //   try {
@@ -92,11 +93,10 @@ const authSlice = createSlice({
       state.message = action.payload.message;
     },
 
-    // [logout.fulfilled]: (state) => {
-    //   state.isAuthenticated = false;
-    //   state.userToken = null;
-    //   state.username = null;
-    // },
+    [logout.fulfilled]: (state, action) => {
+      state.isAuthenticated = false;
+      state.user = null;
+    },
 
     // [getAllUser.fulfilled]: (state, action) => {
     //   state.allUser = action.payload.users;
