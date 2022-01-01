@@ -7,29 +7,34 @@ const Details = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
+      
        <TouchableOpacity style={{ marginTop: 10, backgroundColor: "#fff" }} onPress={() => navigation.goBack()}>
           <Text>
             <Ionicons name="arrow-back" size={20} color="black"></Ionicons>
           </Text>
         </TouchableOpacity>
-        <View style={{ alignItems: "center", width: "100%", height: 400, backgroundColor: "#fff" }}>
+
+        <View style={{ alignItems: "center", width: "100%", height: "46%", backgroundColor: "#fff" }}>
           <Text style={{ marginTop: 10, marginHorizontal: 10, fontWeight: "bold", fontSize: 18, color: "#3e4242" }}>
             {book.name}
           </Text>
           <Image style={styles.Image} source={book.image ? { uri: book.image } : null} />
         </View>
-        <Text style={{ marginTop: 10, marginHorizontal: 10, fontWeight: "bold", fontSize: 14, color: "gray" }}>
+
+        <View style={{height:"7%"}}>
+        <Text style={{ marginTop: 8, marginHorizontal: 10, fontWeight: "bold", fontSize: 14, color: "gray" }}>
           {book.author}
         </Text>
-        <Text style={{ marginTop: 10, marginHorizontal: 10, fontWeight: "bold", fontSize: 18, color: "#ebb859" }}>
+        <Text style={{ marginTop: 8, marginHorizontal: 10, fontWeight: "bold", fontSize: 18, color: "#ebb859" }}>
           {book.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
         </Text>
+        </View>
 
         <View
           style={{
             flexDirection: "row",
-            height: 90,
-            marginVertical:20,
+            height: "10%",
+            marginVertical:18,
             backgroundColor: "#fff",
             paddingTop: 20,
             marginHorizontal: 18,
@@ -55,10 +60,15 @@ const Details = ({ route, navigation }) => {
             </Text>
           </View>
         </View>
-        <ScrollView style={{height:150}}>
+
+        <View>
+          <Text style={{marginHorizontal:10, fontSize:16, fontWeight:"bold"}}>Mô tả</Text>
+          <ScrollView style={{height:"14%"}}>
         <Text style={{ marginTop: 10, marginHorizontal: 18, fontSize: 14, color: "gray" }}>{book.description}</Text>
         </ScrollView>
-      <View style={{ flexDirection: "row", height: 90, marginTop: 10, paddingTop: 20, marginHorizontal: 16 }}>
+        </View>
+
+      <View style={{ flexDirection: "row", height: "11%", marginTop: 10, paddingTop: 20, marginHorizontal: 16 }}>
           <View
             style={{
               flexDirection: "row",
@@ -103,7 +113,7 @@ const styles = StyleSheet.create({
   },
   Image: {
     width: 220,
-    height: 300,
+    height: "70%",
     marginTop: 40,
     borderRadius: 20,
   },
