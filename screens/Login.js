@@ -72,6 +72,7 @@ const Login = ({ navigation }) => {
                   placeholder="password"
                   onChangeText={handleChange("password")}
                   onBlur={handleBlur("password")}
+                  secureTextEntry={true}
                   value={values.password}
                 />
                 <Text

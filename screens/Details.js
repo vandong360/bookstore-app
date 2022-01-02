@@ -2,6 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+import Rating from "../Components/rating";
+
 const Details = ({ route, navigation }) => {
   const { book } = route.params;
 
@@ -14,7 +16,7 @@ const Details = ({ route, navigation }) => {
           </Text>
         </TouchableOpacity>
 
-        <View style={{ alignItems: "center", width: "100%", height: "46%", backgroundColor: "#fff" }}>
+        <View style={{ alignItems: "center", width: "100%", height: "46%", backgroundColor: "#fff", borderBottomLeftRadius:30, borderBottomRightRadius:30 }}>
           <Text style={{ marginTop: 10, marginHorizontal: 10, fontWeight: "bold", fontSize: 18, color: "#3e4242" }}>
             {book.name}
           </Text>
@@ -23,11 +25,21 @@ const Details = ({ route, navigation }) => {
 
         <View style={{height:"7%"}}>
         <Text style={{ marginTop: 8, marginHorizontal: 10, fontWeight: "bold", fontSize: 14, color: "gray" }}>
-          {book.author}
+          Tác giả: {book.author}
         </Text>
+        <View style={{flexDirection:"row"}}>
         <Text style={{ marginTop: 8, marginHorizontal: 10, fontWeight: "bold", fontSize: 18, color: "#ebb859" }}>
           {book.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
         </Text>
+        <Text style={{ marginTop: 9, marginHorizontal: 10, fontWeight: "bold", fontSize: 16, 
+        color: "#C0CCCC",textDecorationLine: 'line-through' }}>
+          {book.oldPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
+        <View style={{
+          width:45, height:30, backgroundColor:"#EDBD9A", alignItems:"center", borderRadius:5, marginTop:3,marginHorizontal: 10
+        }}>
+          <Text style={{marginVertical:3, fontWeight:"bold", color:"white"}}>{book.discount} %</Text>
+        </View>
+        </View>
         </View>
 
         <View
@@ -42,20 +54,20 @@ const Details = ({ route, navigation }) => {
           }}
         >
           <View style={{ flexDirection: "column", flex: 1 }}>
-            <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 14, color: "#ebb859" }}>Số Trang</Text>
-            <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 14, color: "#3e4242" }}>
+            <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 14, color: "#3e4242" }}>Số Trang</Text>
+            <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 14, color: "#ebb859", marginTop:6 }}>
               {book.soTrang}
             </Text>
           </View>
           <View style={{ flexDirection: "column", flex: 1 }}>
-            <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 14, color: "#ebb859" }}>Đánh giá</Text>
-            <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 14, color: "#3e4242" }}>
-              {book.rating}
+            <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 14, color: "#3e4242" }}>Đánh giá</Text>
+            <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 14, }}>
+              <Rating rating={book.rating}> </Rating>
             </Text>
           </View>
           <View style={{ flexDirection: "column", flex: 1 }}>
-            <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 14, color: "#ebb859" }}>Xuất Bản</Text>
-            <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 14, color: "#3e4242" }}>
+            <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 14, color: "#3e4242" }}>Xuất Bản</Text>
+            <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 14, color: "#ebb859", marginTop:6 }}>
               {book.namXB}
             </Text>
           </View>

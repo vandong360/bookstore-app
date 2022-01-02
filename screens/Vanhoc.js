@@ -49,8 +49,8 @@ const Vanhoc = ({navigation}) =>{
                     fontSize:14
                     }}>{item.discount}%</Text>
             </View>
-            <Text style={styles.price}>{item.price} đ</Text>
-            <Text style={styles.oldPrice}>{item.oldPrice} đ</Text>
+            <Text style={styles.price}>{item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
+            <Text style={styles.oldPrice}>{item.oldPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
             </TouchableOpacity>
         </View>
     )
