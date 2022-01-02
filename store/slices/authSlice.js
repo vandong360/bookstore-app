@@ -6,6 +6,11 @@ export const register = createAsyncThunk("auth/user/register", async ({ values }
     const api = "https://bookstore360.herokuapp.com/auth/register";
     const response = await axios.post(api, values);
     if (response.data.success) {
+      const userId = response.data.user._id;
+      const products = []
+      const apiCart = "https://bookstore360.herokuapp.com/cart/";
+      
+      await axios.post(apiCart, {userId, products});
       return response.data;
     } else {
       return thunkAPI.rejectWithValue(response.data);
@@ -32,7 +37,7 @@ export const login = createAsyncThunk("auth/user/login", async ({ username, pass
 });
 
 export const logout = createAsyncThunk("logout", (thunkAPI) => {
-  const Logout = false
+  const Logout = false;
   return Logout;
 });
 
