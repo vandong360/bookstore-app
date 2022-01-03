@@ -3,20 +3,21 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from "react
 import images from "../constants/images";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { TextInput } from "react-native-gesture-handler";
+import Rating from "../Components/rating";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getNewProd, getHotProd } from "../store/slices/productSlice";
-
-import Rating from "../Components/rating";
+import { getCart } from "../store/slices/cartSlice";
 
 const Home = ({ route, navigation }) => {
-  
   const dispatch = useDispatch();
   const { newProducts, hotProducts } = useSelector((state) => state.products);
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getNewProd());
     dispatch(getHotProd());
+    dispatch(getCart(user._id));
   }, []);
 
   const convertCategory = (category) => {

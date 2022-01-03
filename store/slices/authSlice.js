@@ -10,7 +10,7 @@ export const register = createAsyncThunk("auth/user/register", async ({ values }
       const products = []
       const apiCart = "https://bookstore360.herokuapp.com/cart/";
       
-      await axios.post(apiCart, {userId, products});
+      await axios.post(apiCart, { userId, products });
       return response.data;
     } else {
       return thunkAPI.rejectWithValue(response.data);
@@ -102,17 +102,6 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
-
-    // [getAllUser.fulfilled]: (state, action) => {
-    //   state.allUser = action.payload.users;
-    // },
-
-    // [deleteUser.fulfilled]: (state, action) => {
-    //   state.message = action.payload.message;
-    // },
-    // [deleteUser.rejected]: (state, action) => {
-    //   state.message = action.payload.message;
-    // },
   },
 });
 
