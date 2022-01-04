@@ -14,8 +14,12 @@ export const bestseller1 = require("../images/bestseller1.jpg");
 export const bestseller2 = require("../images/bestseller2.jpg"); 
 export const bestseller3 = require("../images/bestseller3.jpg");
 export const star = require("../images/star.png");
-export const logout = require("../images/logout.png")  
-
+export const logout = require("../images/logout.png");
+export const edit = require("../images/editing.png");
+export const bgProfile = require("../images/bgprofile.jpg");
+export const phone = require("../images/call.png");
+export const email = require("../images/email.png");
+export const address = require("../images/location.png");
 export default{
     trendingbook1,
     icHome,
@@ -33,5 +37,10 @@ export default{
     bestseller2,
     bestseller3,
     star,
-    logout
+    logout,
+    edit,
+    bgProfile,
+    phone,
+    email,
+    address
 }
