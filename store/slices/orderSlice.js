@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const createOrder = createAsyncThunk("order/created", async (thunkAPI) => {
+export const createOrder = createAsyncThunk("order/created", async (values ,thunkAPI) => {
   try {
     const api = "https://bookstore360.herokuapp.com/orders/";
     const response = await axios.post(api, values);
@@ -60,24 +60,17 @@ export const createOrder = createAsyncThunk("order/created", async (thunkAPI) =>
 
 const initialState = {
   message: null,
-  orders: null,
-  order: null,
 };
 
 const orderSlice = createSlice({
-  name: "orders",
+  name: "order",
   initialState,
   extraReducers: {
-    [getAll.fulfilled]: (state, action) => {
-      state.message = action.payload.message;
-      state.orders = action.payload.orders;
-    },
-    [changeStatus.fulfilled]: (state, action) => {
+    [createOrder.fulfilled]: (state, action) => {
       state.message = action.payload.message;
     },
-    [getOneOrder.fulfilled]: (state, action) => {
+    [createOrder.rejected]: (state, action) => {
       state.message = action.payload.message;
-      state.order = action.payload.order;
     },
   },
 });
