@@ -158,7 +158,7 @@ const Home = ({ route, navigation }) => {
 
               <View style={{ flex: 1, marginLeft: 10, marginVertical: 10 }}>
                 <View>
-                  <Text style={{ fontWeight: "bold", fontSize: 17 }}>{item.name} Như con cặc</Text>
+                  <Text style={{ fontWeight: "bold", fontSize: 17 }}>{item.name}</Text>
                   <Text style={{ fontWeight: "bold", color: "gray", marginTop: 10 }}>{item.author}</Text>
                   <Rating rating={item.rating}> </Rating>
                   <View
