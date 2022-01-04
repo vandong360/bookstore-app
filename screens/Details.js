@@ -33,6 +33,7 @@ const Details = ({ route, navigation }) => {
 
     const checking = groupId.indexOf(bookId);
     console.log(checking);
+
   };
 
   const handleAddCart = async () => {

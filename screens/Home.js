@@ -51,7 +51,7 @@ const Home = ({ route, navigation }) => {
         break;
       }
     }
-  }
+  };
 
   //component new book
   function renderNewProducts(newProducts) {
@@ -139,9 +139,9 @@ const Home = ({ route, navigation }) => {
   //component hot book
   function renderHotProducts(hotProducts) {
     const renderItem = ({ item, index }) => {
-      if(item.rating>=4){
+      if (item.rating >= 4) {
         return (
-          <View style={{ marginVertical: 10, }}>
+          <View style={{ marginVertical: 10 }}>
             <TouchableOpacity
               style={{ flexDirection: "row", marginLeft: 10 }}
               onPress={() => navigation.navigate("Details", { book: item })}
@@ -155,10 +155,10 @@ const Home = ({ route, navigation }) => {
                   borderRadius: 10,
                 }}
               ></Image>
-  
+
               <View style={{ flex: 1, marginLeft: 10, marginVertical: 10 }}>
                 <View>
-                  <Text style={{ fontWeight: "bold", fontSize: 17 }}>{item.name}</Text>
+                  <Text style={{ fontWeight: "bold", fontSize: 17 }}>{item.name} Như con cặc</Text>
                   <Text style={{ fontWeight: "bold", color: "gray", marginTop: 10 }}>{item.author}</Text>
                   <Rating rating={item.rating}> </Rating>
                   <View
