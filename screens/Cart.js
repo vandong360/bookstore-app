@@ -73,29 +73,6 @@ const Cart = () => {
           showsVerticalScrollIndicator={true}
         ></FlatList>
 
-        <View style={styles.code}>
-          <View style={{ marginHorizontal: 10, marginVertical: 8 }}>
-            <TextInput placeholder="Mã khuyến mãi"></TextInput>
-          </View>
-          <View style={{ marginVertical: 8, marginLeft: 220 }}>
-            <Ionicons name="arrow-forward" size={30} color="#ebb859"></Ionicons>
-          </View>
-        </View>
-
-        <View>
-          <View style={{ flexDirection: "row", marginHorizontal: 15, marginBottom: 10 }}>
-            <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng</Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right" }}>1.000.000 đ</Text>
-          </View>
-          <View style={{ flexDirection: "row", marginHorizontal: 15, marginBottom: 10 }}>
-            <Text style={{ fontWeight: "bold", flex: 1 }}>Giảm giá</Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right" }}>0 đ</Text>
-          </View>
-          <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
-            <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng</Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right" }}>1.000.000 đ</Text>
-          </View>
-        </View>
       </View>
     );
   }
