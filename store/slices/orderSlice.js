@@ -1,20 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// export const createNewUserOrder = createAsyncThunk("dashboard/orders/", async (thunkAPI) => {
-//   try {
-//     const api = "http://localhost:4000/cart/";
-//     const response = await axios.post(api, values);
-//     if (response.data.success) {
-//       return response.data;
-//     } else {
-//       return thunkAPI.rejectWithValue(response.data);
-//     }
-//   } catch (error) {
-//     console.log(error.response.message);
-//     return thunkAPI.rejectWithValue(error.response.message);
-//   }
-// });
+export const createOrder = createAsyncThunk("order/created", async (thunkAPI) => {
+  try {
+    const api = "https://bookstore360.herokuapp.com/orders/";
+    const response = await axios.post(api, values);
+    if (response.data.success) {
+      return response.data;
+    } else {
+      return thunkAPI.rejectWithValue(response.data);
+    }
+  } catch (error) {
+    console.log(error.response.message);
+    return thunkAPI.rejectWithValue(error.response.message);
+  }
+});
 
 // export const getAll = createAsyncThunk("dashboard/orders/", async (thunkAPI) => {
 //   try {
