@@ -10,7 +10,7 @@ const Cart = () => {
   const { itemCart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  function renderListProduct(product) {
+  function renderListProduct(itemCart) {
     const renderItem = ({ item }) => {
       return (
         <View
@@ -26,7 +26,7 @@ const Cart = () => {
           }}
         >
           <Image
-            source={{ uri: item.image }}
+            source={{ uri: item.productImg }}
             resizeMode="cover"
             style={{
               width: 70,
@@ -35,7 +35,7 @@ const Cart = () => {
             }}
           ></Image>
           <View style={{ flex: 1, marginHorizontal: 10 }}>
-            <Text style={{ fontSize: 16, fontWeight: "bold" }}>{item.name}</Text>
+            <Text style={{ fontSize: 16, fontWeight: "bold" }}>{item.productName}</Text>
             <Text style={{ marginVertical: 10 }}>
               <Ionicons name="star" size={15} color="#ebb859"></Ionicons>
               {item.rating}
@@ -64,7 +64,7 @@ const Cart = () => {
           data={itemCart}
           keyExtractor={(item) => item._id.toString()}
           renderItem={renderItem}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={true}
         ></FlatList>
 
         <View style={styles.code}>
