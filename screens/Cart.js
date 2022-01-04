@@ -38,7 +38,7 @@ const Cart = () => {
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>{item.productName}</Text>
             <Text style={{ marginVertical: 10 }}>
               <Ionicons name="star" size={15} color="#ebb859"></Ionicons>
-              {item.rating}
+              {item.productDiscount}
             </Text>
             <View style={{ flexDirection: "row" }}>
               <View style={styles.qty}>
@@ -52,7 +52,7 @@ const Cart = () => {
           </View>
           <View>
             <Text style={{ textAlign: "right", fontWeight: "bold" }}>X</Text>
-            <Text style={{ fontWeight: "bold", marginTop: 45 }}>{item.price}</Text>
+            <Text style={{ fontWeight: "bold", marginTop: 45 }}>{item.productPrice}</Text>
           </View>
         </View>
       );
