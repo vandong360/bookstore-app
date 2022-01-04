@@ -19,7 +19,7 @@ const Cart = () => {
             marginVertical: 10,
             marginHorizontal: 10,
             borderColor: "#dbdbdb",
-            borderWidth: 2,
+            borderWidth: 1,
             paddingHorizontal: 10,
             paddingVertical: 10,
             borderRadius: 10,
@@ -29,30 +29,48 @@ const Cart = () => {
             source={{ uri: item.productImg }}
             resizeMode="cover"
             style={{
-              width: 70,
-              height: 100,
+              width: 80,
+              height: 120,
               borderRadius: 10,
             }}
           ></Image>
-          <View style={{ flex: 1, marginHorizontal: 10 }}>
-            <Text style={{ fontSize: 16, fontWeight: "bold" }}>{item.productName}</Text>
-            <Text style={{ marginVertical: 10 }}>
-              <Ionicons name="star" size={15} color="#ebb859"></Ionicons>
-              {item.productDiscount}
+
+    
+          <View style={{ marginHorizontal: 10, flex:1 }}>
+            <View style={{flex:1,}}>
+            <Text style={{ fontSize: 15, fontWeight: "bold", flex:1, }}>{item.productName}</Text>
+            </View>
+
+            <View style={{height:45}}>
+            <View style={styles.discount}>
+            <Text style={{fontWeight:"bold", color:"#FFF",}}>
+              {item.productDiscount} %
             </Text>
-            <View style={{ flexDirection: "row" }}>
+            </View>
+            </View>
+
+            <View style={{ flexDirection: "row", flex:1, marginTop:10 }}>
               <View style={styles.qty}>
                 <Text>-</Text>
               </View>
-              <Text style={{ marginRight: 10, fontWeight: "bold" }}>{item.quantity}</Text>
+              <Text style={{ marginRight: 10, fontWeight: "bold",  }}>{item.quantity}</Text>
               <View style={styles.qty}>
                 <Text>+</Text>
               </View>
             </View>
+
           </View>
+
+
           <View>
-            <Text style={{ textAlign: "right", fontWeight: "bold" }}>X</Text>
-            <Text style={{ fontWeight: "bold", marginTop: 45 }}>{item.productPrice}</Text>
+            <View style={{flex:1}}>
+                <Text style={{ textAlign: "right", fontWeight: "bold" }}>X
+                </Text>
+            </View>
+            <View style={{flex:1, justifyContent:"flex-end"}}>
+                <Text style={{ fontWeight: "bold", color:"#ED2629"}}>
+                {item.productPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
+                </Text></View>
           </View>
         </View>
       );
@@ -67,18 +85,18 @@ const Cart = () => {
           showsVerticalScrollIndicator={true}
         ></FlatList>
 
-        <View style={{marginTop:20}}>
+        <View style={{marginTop:20, }}>
           <View style={{ flexDirection: "row", marginHorizontal: 15, marginBottom: 10 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng</Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right" }}>1.000.000 đ</Text>
+            <Text style={{ fontWeight: "bold", textAlign: "right", color:"#ED2629" }}>1.000.000 đ</Text>
           </View>
           <View style={{ flexDirection: "row", marginHorizontal: 15, marginBottom: 10 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Giảm giá</Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right" }}>0 đ</Text>
+            <Text style={{ fontWeight: "bold", textAlign: "right", color:"#ED2629" }}>0 đ</Text>
           </View>
           <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng</Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right" }}>1.000.000 đ</Text>
+            <Text style={{ fontWeight: "bold", textAlign: "right", color:"#ED2629" }}>1.000.000 đ</Text>
           </View>
         </View>
       </View>
@@ -130,6 +148,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 25,
     borderRadius: 10,
+  },
+  discount: {
+    flex:1,
+    width: 45,
+    height: 15,
+    backgroundColor: "#DE3538",
+    alignItems: "center",
+    borderRadius: 5,
+    marginBottom:10,
+    marginTop:10,
+    justifyContent:"center"
   },
 });
 
