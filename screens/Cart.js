@@ -51,13 +51,19 @@ const Cart = () => {
             </View>
           </View>
           <View>
-            <Text style={{ textAlign: "right", fontWeight: "bold" }}>X</Text>
-            <Text style={{ fontWeight: "bold", marginTop: 45 }}>{item.productPrice}</Text>
+            <View style={{flex:1}}>
+                <Text style={{ textAlign: "right", fontWeight: "bold" }}>X
+                </Text>
+            </View>
+            <View style={{flex:1, justifyContent:"flex-end"}}>
+                <Text style={{ fontWeight: "bold", color:"#ED2629"}}>
+                {item.productPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}  đ
+                </Text></View>
           </View>
         </View>
       );
     };
-
+ 
     return (
       <View>
         <FlatList
