@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from "rea
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Rating from "../Components/rating";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCart } from "../store/slices/cartSlice";
+import { getCart, updateCart } from "../store/slices/cartSlice";
 
 const dataItem = (productId, productImg, productName, productPrice, productDiscount, quantity) => {
   return { productId, productImg, productName, productPrice, productDiscount, quantity };
@@ -13,6 +13,7 @@ const Details = ({ route, navigation }) => {
   const [Quantity, setQuantt] = React.useState(1);
   const { book } = route.params;
   const { cart, itemCart } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const decreased = () => {
@@ -23,6 +24,17 @@ const Details = ({ route, navigation }) => {
     setQuantt(Quantity + 1);
   };
 
+  const checkItem = (bookId) => {
+    let groupId = [];
+    itemCart.map((item) => {
+      groupId.push(item.productId);
+    });
+    console.log(groupId);
+
+    const checking = groupId.indexOf(bookId);
+    console.log(checking);
+  };
+
   const handleAddCart = async () => {
     const cartId = cart._id;
     const item = dataItem(book._id, book.image, book.name, book.price, book.discount, Quantity);
@@ -30,12 +42,14 @@ const Details = ({ route, navigation }) => {
     const p = [];
     let products = p.concat(itemCart);
     products.push(item);
-    console.log("abc: ", products);
+
     const values = { cartId, products };
     const response = await dispatch(updateCart(values));
+
     if (response.payload.success) {
+      await dispatch(getCart(user._id));
       console.log("Đã thêm vào giỏ hàng!");
-    } else console.log("đéo được đm");
+    } else console.log("Không thành công!");
   };
 
   return (

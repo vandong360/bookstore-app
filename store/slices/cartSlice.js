@@ -21,9 +21,6 @@ export const updateCart = createAsyncThunk("cart/user/updated", async (v, thunkA
   try {
     const api = "https://bookstore360.herokuapp.com/cart/";
     const values = { products: v.products };
-    console.log(v.cartId)
-    console.log("item: ", v.products);
-    console.log("values: ",values)
     const response = await axios.put(api + `${v.cartId}`, values);
     if (response.data.success) {
       return response.data;
