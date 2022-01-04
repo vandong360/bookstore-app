@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import "react-native-gesture-handler";
 import MenuDrawer from "./navigation/MenuDrawer";
 import store from "./store/store.js";
@@ -10,6 +10,7 @@ import Login from "./screens/Login";
 import Register from "./screens/Register";
 import BottomNavigator from "./navigation/BottomNavigator";
 import { useSelector } from "react-redux";
+import Profile from "./screens/Profile";
 
 const Stack = createStackNavigator();
 
