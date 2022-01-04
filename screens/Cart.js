@@ -69,7 +69,7 @@ const Cart = () => {
             </View>
             <View style={{flex:1, justifyContent:"flex-end"}}>
                 <Text style={{ fontWeight: "bold", color:"#ED2629"}}>
-                {item.productPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
+                {item.productPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}  đ
                 </Text></View>
           </View>
         </View>
