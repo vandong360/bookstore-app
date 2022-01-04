@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, Alert } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Rating from "../Components/rating";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,8 +48,8 @@ const Details = ({ route, navigation }) => {
 
     if (response.payload.success) {
       await dispatch(getCart(user._id));
-      console.log("Đã thêm vào giỏ hàng!");
-    } else console.log("Không thành công!");
+      Alert.alert('Đã thêm vào giỏ hàng')
+    } else Alert.alert('Không thành công');
   };
 
   return (
