@@ -15,14 +15,12 @@ const screenOption = {
         tabBarShowLabel: false,
         tabBarStyle: {
           position: "absolute",
-          backgroundColor: "#ebb859",
+          backgroundColor: "#FFF",
           bottom: 0,
           left: 0,
           right: 0,
           elevation: 0,
           height: 60,
-          borderTopRightRadius: 10,
-          borderTopLeftRadius: 10,
         }
       }
 
@@ -36,9 +34,9 @@ const BottomNavigator = ({navigation,route}) => {
           tabBarIcon: ({ focused }) => {
             return (
               <Image
-                source={images.icHome3x}
+                source={images.home}
                 style={{
-                  tintColor: focused ? "white" : "gray",
+                  tintColor: focused ? "#ebb859" : "#dbdbdb", width:23, height:23, 
                 }}
               />
             );
@@ -54,9 +52,9 @@ const BottomNavigator = ({navigation,route}) => {
           tabBarIcon: ({ focused }) => {
             return (
               <Image
-                source={images.icCart3x}
+                source={images.cart}
                 style={{
-                  tintColor: focused ? "white" : "gray",
+                  tintColor: focused ? "#ebb859" : "#dbdbdb", width:23, height:23
                 }}
               />
             );
@@ -67,14 +65,14 @@ const BottomNavigator = ({navigation,route}) => {
         name="Thông tin"
         component={Profile}
         options={{
-          headerStyle: { backgroundColor: "#ebb859" },
+          headerStyle: { backgroundColor: "#ebb859" }, 
           headerTintColor: "#fff",
           tabBarIcon: ({ focused }) => {
             return (
               <Image
-                source={images.icProfile3x}
+                source={images.profile}
                 style={{
-                  tintColor: focused ? "white" : "gray",
+                  tintColor: focused ? "#ebb859" : "#dbdbdb", width:23, height:23
                 }}
               />
             );
@@ -90,9 +88,9 @@ const BottomNavigator = ({navigation,route}) => {
           tabBarIcon: ({ focused }) => {
             return (
               <Image
-                source={images.icSetting3x}
+                source={images.setting}
                 style={{
-                  tintColor: focused ? "white" : "gray",
+                  tintColor: focused ? "#ebb859" : "#dbdbdb", width:23, height:23
                 }}
               />
             );

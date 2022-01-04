@@ -139,47 +139,48 @@ const Home = ({ route, navigation }) => {
   //component hot book
   function renderHotProducts(hotProducts) {
     const renderItem = ({ item, index }) => {
-      return (
-        <View style={{ marginVertical: 10 }}>
-          <TouchableOpacity
-            style={{ flexDirection: "row", marginLeft: 10 }}
-            onPress={() => navigation.navigate("Details", { book: item })}
-          >
-            <Image
-              source={{ uri: item.image }}
-              resizeMode="cover"
-              style={{
-                width: 100,
-                height: 150,
-                borderRadius: 10,
-              }}
-            ></Image>
-
-            <View style={{ flex: 1, marginLeft: 10, marginVertical: 10 }}>
-              <View>
-                <Text style={{ fontWeight: "bold", fontSize: 17 }}>{item.name}</Text>
-                <Text style={{ fontWeight: "bold", color: "gray", marginTop: 10 }}>{item.author}</Text>
-                <Rating rating={item.rating}> </Rating>
-                <View
-                  style={{
-                    backgroundColor: "#ebb859",
-                    width: 90,
-                    alignItems: "center",
-                    borderRadius: 8,
-                    marginTop: 15,
-                  }}
-                >
-                  <Text style={{ fontWeight: "bold", color: "white", marginVertical: 2 }}>
-                    {item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
-                  </Text>
+      if(item.rating>=4){
+        return (
+          <View style={{ marginVertical: 10, }}>
+            <TouchableOpacity
+              style={{ flexDirection: "row", marginLeft: 10 }}
+              onPress={() => navigation.navigate("Details", { book: item })}
+            >
+              <Image
+                source={{ uri: item.image }}
+                resizeMode="cover"
+                style={{
+                  width: 100,
+                  height: 150,
+                  borderRadius: 10,
+                }}
+              ></Image>
+  
+              <View style={{ flex: 1, marginLeft: 10, marginVertical: 10 }}>
+                <View>
+                  <Text style={{ fontWeight: "bold", fontSize: 17 }}>{item.name}</Text>
+                  <Text style={{ fontWeight: "bold", color: "gray", marginTop: 10 }}>{item.author}</Text>
+                  <Rating rating={item.rating}> </Rating>
+                  <View
+                    style={{
+                      backgroundColor: "#ebb859",
+                      width: 90,
+                      alignItems: "center",
+                      borderRadius: 8,
+                      marginTop: 15,
+                    }}
+                  >
+                    <Text style={{ fontWeight: "bold", color: "white", marginVertical: 2 }}>
+                      {item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
+                    </Text>
+                  </View>
                 </View>
               </View>
-            </View>
-          </TouchableOpacity>
-        </View>
-      );
+            </TouchableOpacity>
+          </View>
+        );
+      }
     };
-
     return (
       <View>
         <Text style={{ marginHorizontal: 10, fontWeight: "bold", fontSize: 16, color: "#ebb859", marginTop: 20 }}>

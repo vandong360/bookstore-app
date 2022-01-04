@@ -20,6 +20,10 @@ export const bgProfile = require("../images/bgprofile.jpg");
 export const phone = require("../images/call.png");
 export const email = require("../images/email.png");
 export const address = require("../images/location.png");
+export const home = require("../images/home.png");
+export const cart = require("../images/shopping-cart.png");
+export const profile = require("../images/user.png");
+export const setting = require("../images/setting.png");
 export default{
     trendingbook1,
     icHome,
@@ -42,5 +46,9 @@ export default{
     bgProfile,
     phone,
     email,
-    address
+    address,
+    home,
+    cart,
+    profile,
+    setting
 }
