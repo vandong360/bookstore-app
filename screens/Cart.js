@@ -96,9 +96,9 @@ const Cart = ({route,navigation}) => {
           </View>
 
           <View>
-            <View style={{ flex: 1 }}>
-              <Text style={{ textAlign: "right", fontWeight: "bold" }}>X</Text>
-            </View>
+            <TouchableOpacity style={{left:"80%"}}>
+            <Image source={images.close} style={{width:15, height:15}}></Image>
+            </TouchableOpacity>
             <View style={{ flex: 1, justifyContent: "flex-end" }}>
               <Text style={{ fontWeight: "bold", color: "#ED2629" }}>
                 {item.productPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
