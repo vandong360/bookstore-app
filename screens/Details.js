@@ -4,6 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Rating from "../Components/rating";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart, updateCart } from "../store/slices/cartSlice";
+import images from "../constants/images"; 
 
 const dataItem = (productId, productImg, productName, productPrice, productDiscount, quantity) => {
   return { productId, productImg, productName, productPrice, productDiscount, quantity };
@@ -117,12 +118,12 @@ const Details = ({ route, navigation }) => {
             <Text style={{ textAlign: "center", fontWeight: "bold" }}>QTY</Text>
           </View>
           <View style={{ flexDirection: "row", paddingLeft: 40 }}>
-            <TouchableOpacity onPress={decreased}>
-              <Text style={{ marginRight: 20 }}>-</Text>
+            <TouchableOpacity onPress={decreased} style={{marginTop:6}} >
+            <Image source={images.minus} style={{width:13, height:13}}></Image>
             </TouchableOpacity>
-            <Text style={{ marginRight: 20 }}>{Quantity}</Text>
-            <TouchableOpacity onPress={increased}>
-              <Text style={{ marginRight: 20 }}>+</Text>
+            <View ><Text style={{ marginHorizontal:15, fontWeight:"bold", fontSize:16}}>{Quantity}</Text></View>
+            <TouchableOpacity onPress={increased} style={{marginTop:6}} >
+            <Image source={images.plus} style={{width:13, height:13}}></Image>
             </TouchableOpacity>
           </View>
         </View>
