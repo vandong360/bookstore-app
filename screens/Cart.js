@@ -6,7 +6,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../store/slices/orderSlice";
 
-const Cart = ({route,navigation}) => {
+const Cart = ({ route, navigation }) => {
   const { itemCart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -18,6 +18,31 @@ const Cart = ({route,navigation}) => {
 
   const totalPrice = cart.reduce((summedPrice, product) => summedPrice + product.productPrice * product.quantity, 0);
   const amount = cart.reduce((amount, product) => amount + product.quantity, 0);
+
+  const submitOrder = async () => {
+    const products = cart.map((c) => {
+      return {
+        productId: c.productId,
+        productName: c.productName,
+        productImg: c.productImg,
+        price: c.productPrice,
+        quantity: c.quantity,
+      };
+    });
+
+    // console.log(products);
+    const newOrder = {
+      userId: user._id,
+      userName: user.name,
+      products: products,
+      amount: amount,
+      totalPrice: totalPrice,
+      address: user.address,
+      phone: user.phone,
+    };
+    console.log("newOrder: ", newOrder);
+    // const response = await dispatch(createOrder());
+  };
 
   function renderListProduct(cart) {
     const arr = [];
@@ -47,31 +72,6 @@ const Cart = ({route,navigation}) => {
         setCarts(ncart);
       };
 
-      const submitOrder = async () => {
-        const products = cart.map((c) => {
-          return {
-            productId: c.productId,
-            productName: c.productName,
-            productImg: c.productImg,
-            price: c.productPrice,
-            quantity: c.quantity,
-          };
-        });
-
-        // console.log(products);
-        const newOrder = {
-          userId: user._id,
-          userName: user.name,
-          products: products,
-          amount: amount,
-          totalPrice: totalPrice,
-          address: user.address,
-          phone: user.phone,
-        };
-        // console.log("asc: ",newOrder);
-        // const response = await dispatch(createOrder());
-      };
-      submitOrder()
       return (
         <View
           style={{
@@ -123,8 +123,8 @@ const Cart = ({route,navigation}) => {
           </View>
 
           <View>
-            <TouchableOpacity style={{left:"80%"}}>
-            <Image source={images.close} style={{width:15, height:15}}></Image>
+            <TouchableOpacity style={{ left: "80%" }} onPress={removeItem}>
+              <Image source={images.close} style={{ width: 12, height: 12 }}></Image>
             </TouchableOpacity>
             <View style={{ flex: 1, justifyContent: "flex-end" }}>
               <Text style={{ fontWeight: "bold", color: "#ED2629" }}>
@@ -170,7 +170,7 @@ const Cart = ({route,navigation}) => {
             marginHorizontal: 10,
             marginVertical: 20,
           }}
-          onPress={() => navigation.navigate('Checkout')}
+          onPress={submitOrder}
         >
           <Text style={{ textAlign: "center", fontWeight: "bold", color: "#fff", fontSize: 16, marginVertical: 12 }}>
             Mua Hàng
