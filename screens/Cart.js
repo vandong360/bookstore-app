@@ -9,7 +9,6 @@ import { getCart, updateCart } from "../store/slices/cartSlice";
 const Cart = () => {
   const { itemCart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const [qty, setQty] = React.useState();
   const [cart, setCarts] = React.useState(itemCart);
 
   React.useEffect(() => {
@@ -18,15 +17,20 @@ const Cart = () => {
   }, [itemCart]);
 
   function renderListProduct(cart) {
-    function renderItem({ item, index }) {
-      // const renderQty = (qtty) => {
-      //   setQty(qtty);
-      // }
-      const decreased = () => {
-        console.log(index);
+    const arr = [];
+    let ncart = arr.concat(cart);
 
+    function renderItem({ item, index }) {
+
+
+      const decreased = () => {
         if (item.quantity > 1) {
           // setQty(qty - 1);
+          let rm = ncart.splice(index, 1);
+          rm.quantity = 5
+          console.log(rm)
+          setCarts(ncart);
+
         }
       };
 
