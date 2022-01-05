@@ -56,30 +56,31 @@ const Checkout = ({ route, navigation }) => {
 
     return (
       <View>
-        <View style={{flexDirection:"row", marginVertical:10}}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={{flex:1, justifyContent:"center", left:10}}>
-        <Image source={images.back} style={{width:20, height:20}}></Image>
-        </TouchableOpacity>
-        <View style={{flex:1, alignItems:"center"}}>
-        <Text style={{ textAlign: "center", fontSize: 18, fontWeight: "bold", right:10}}>Đặt Hàng</Text>
+        <View style={{ flexDirection: "row", marginVertical: 10 }}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={{ flex: 1, justifyContent: "center", left: 10 }}>
+            <Image source={images.back} style={{ width: 20, height: 20 }}></Image>
+          </TouchableOpacity>
+          <View style={{ flex: 1, alignItems: "center" }}>
+            <Text style={{ textAlign: "center", fontSize: 18, fontWeight: "bold", right: 10 }}>Đặt Hàng</Text>
+          </View>
         </View>
-        </View>
-        <View style={{height:"62%"}}>
-        <FlatList
-          data={products}
-          keyExtractor={(item) => item.productId.toString()}
-          renderItem={renderItem}
-          showsVerticalScrollIndicator={false}
-        ></FlatList>
+        <View style={{ height: "62%" }}>
+          <FlatList
+            data={products}
+            keyExtractor={(item) => item.productId.toString()}
+            renderItem={renderItem}
+            showsVerticalScrollIndicator={false}
+          ></FlatList>
         </View>
 
-        <View style={{marginTop:30}}>
+        <View style={{ marginTop: 30 }}>
           <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
-            <Text style={{ fontWeight: "bold", flex: 1 }}>Số lượng sách: {products.length}</Text>
+            <Text style={{ fontWeight: "bold", flex: 1 }}>Số lượng sách </Text>
+            <Text style={{ fontWeight: "bold", textAlign: "right"}}>{products.length}</Text>
           </View>
         </View>
 
-        <View style={{marginTop:10}}>
+        <View style={{ marginTop: 10 }}>
           <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng tiền đơn hàng</Text>
             <Text style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>

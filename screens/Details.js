@@ -30,22 +30,27 @@ const Details = ({ route, navigation }) => {
     itemCart.map((item) => {
       groupId.push(item.productId);
     });
-    console.log(groupId);
-
-    const checking = groupId.indexOf(bookId);
-    console.log(checking);
+    const index = groupId.indexOf(bookId);
+    return index;
   };
 
   const handleAddCart = async () => {
+    const index = checkItem(book._id);
     const cartId = cart._id;
     const item = dataItem(book._id, book.image, book.name, book.price, book.discount, Quantity);
 
     const p = [];
     let products = p.concat(itemCart);
+    console.log("index: ", index);
 
-    products.includes(book._id);
-
-    products.push(item);
+    if (index !== -1) {
+      let obj = products[index];
+      let nobj = { ...obj };
+      nobj.quantity = nobj.quantity + Quantity;
+      products.splice(index, 1, nobj);
+    } else {
+      products.push(item);
+    }
 
     const values = { cartId, products };
     const response = await dispatch(updateCart(values));
@@ -58,8 +63,11 @@ const Details = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={{ marginTop: 10, backgroundColor: "#fff", height:30 }} onPress={() => navigation.goBack()}>
-        <Image source={images.back} style={{width:20, height:20, top:10, left:10}}></Image>
+      <TouchableOpacity
+        style={{ marginTop: 10, backgroundColor: "#fff", height: 30 }}
+        onPress={() => navigation.goBack()}
+      >
+        <Image source={images.back} style={{ width: 20, height: 20, top: 10, left: 10 }}></Image>
       </TouchableOpacity>
 
       <View style={styles.view}>
