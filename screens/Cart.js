@@ -4,23 +4,20 @@ import { ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-ha
 import images from "../constants/images";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch, useSelector } from "react-redux";
-import { getCart, updateCart } from "../store/slices/cartSlice";
+import { createOrder } from "../store/slices/orderSlice";
 
 const Cart = () => {
   const { itemCart } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [cart, setCarts] = React.useState(itemCart);
-
-  // const [totalPrice, setTotalPrice] = React.useState();
 
   React.useEffect(() => {
     setCarts(itemCart);
   }, [itemCart]);
 
- 
-  const totalPrice = cart.reduce((summedPrice, product )=>
-    summedPrice + product.productPrice*product.quantity,0,
-  );
+  const totalPrice = cart.reduce((summedPrice, product) => summedPrice + product.productPrice * product.quantity, 0);
+  const amount = cart.reduce((amount, product) => amount + product.quantity, 0);
 
   function renderListProduct(cart) {
     const arr = [];
@@ -30,7 +27,7 @@ const Cart = () => {
       const decreased = () => {
         if (item.quantity > 1) {
           let obj = ncart[index];
-          let nobj = { ...obj }
+          let nobj = { ...obj };
           nobj.quantity = item.quantity - 1;
           ncart.splice(index, 1, nobj);
           setCarts(ncart);
@@ -45,6 +42,36 @@ const Cart = () => {
         setCarts(ncart);
       };
 
+      const removeItem = () => {
+        ncart.splice(index, 1);
+        setCarts(ncart);
+      };
+
+      const submitOrder = async () => {
+        const products = cart.map((c) => {
+          return {
+            productId: c.productId,
+            productName: c.productName,
+            productImg: c.productImg,
+            price: c.productPrice,
+            quantity: c.quantity,
+          };
+        });
+
+        // console.log(products);
+        const newOrder = {
+          userId: user._id,
+          userName: user.name,
+          products: products,
+          amount: amount,
+          totalPrice: totalPrice,
+          address: user.address,
+          phone: user.phone,
+        };
+        // console.log("asc: ",newOrder);
+        // const response = await dispatch(createOrder());
+      };
+      submitOrder()
       return (
         <View
           style={{
@@ -121,9 +148,9 @@ const Cart = () => {
         <View style={{ marginTop: 20 }}>
           <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng</Text>
-            <Text 
-            style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>
-              {totalPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
+            <Text style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>
+              {totalPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
+            </Text>
           </View>
         </View>
       </View>
