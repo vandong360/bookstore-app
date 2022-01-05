@@ -134,5 +134,4 @@ export {
   GiaokhoaStackNavigator,
   LaptrinhStackNavigator,
   ThieunhiStackNavigator,
-  CheckoutStackNavigator
 };

@@ -4,15 +4,13 @@ import { ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-ha
 import images from "../constants/images";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch, useSelector } from "react-redux";
-import { getCart, updateCart } from "../store/slices/cartSlice";
+import { createOrder } from "../store/slices/orderSlice";
 
-const Cart = ({route,navigation}) => {
+const Cart = ({ route, navigation }) => {
   const { itemCart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
   // const dispatch = useDispatch();
   const [cart, setCarts] = React.useState(itemCart);
-
-  // const [totalPrice, setTotalPrice] = React.useState();
 
   React.useEffect(() => {
     setCarts(itemCart);
@@ -55,7 +53,7 @@ const Cart = ({route,navigation}) => {
       const decreased = () => {
         if (item.quantity > 1) {
           let obj = ncart[index];
-          let nobj = { ...obj }
+          let nobj = { ...obj };
           nobj.quantity = item.quantity - 1;
           ncart.splice(index, 1, nobj);
           setCarts(ncart);
@@ -67,6 +65,11 @@ const Cart = ({route,navigation}) => {
         let nobj = { ...obj };
         nobj.quantity = item.quantity + 1;
         ncart.splice(index, 1, nobj);
+        setCarts(ncart);
+      };
+
+      const removeItem = () => {
+        ncart.splice(index, 1);
         setCarts(ncart);
       };
 
@@ -121,8 +124,8 @@ const Cart = ({route,navigation}) => {
           </View>
 
           <View>
-            <TouchableOpacity style={{left:"80%"}}>
-            <Image source={images.close} style={{width:15, height:15}}></Image>
+            <TouchableOpacity style={{ left: "80%" }} onPress={removeItem}>
+              <Image source={images.close} style={{ width: 12, height: 12 }}></Image>
             </TouchableOpacity>
             <View style={{ flex: 1, justifyContent: "flex-end" }}>
               <Text style={{ fontWeight: "bold", color: "#ED2629" }}>
@@ -146,9 +149,9 @@ const Cart = ({route,navigation}) => {
         <View style={{ marginTop: 20 }}>
           <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng</Text>
-            <Text 
-            style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>
-              {totalPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
+            <Text style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>
+              {totalPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
+            </Text>
           </View>
         </View>
       </View>
@@ -168,7 +171,7 @@ const Cart = ({route,navigation}) => {
             marginHorizontal: 10,
             marginVertical: 20,
           }}
-          onPress={() => navigation.navigate('Checkout')}
+          onPress={submitOrder}
         >
           <Text style={{ textAlign: "center", fontWeight: "bold", color: "#fff", fontSize: 16, marginVertical: 12 }}>
             Mua Hàng
