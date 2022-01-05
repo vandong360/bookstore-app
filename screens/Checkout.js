@@ -1,12 +1,23 @@
 import React from "react";
-import { View, Text, FlatList, Image, StyleSheet, Button } from "react-native";
+import { View, Text, FlatList, Image, StyleSheet, Button, Alert } from "react-native";
 import { ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import images from "../constants/images";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useDispatch, useSelector } from "react-redux";
+import { createOrder } from "../store/slices/orderSlice";
 
 const Checkout = ({ route, navigation }) => {
-  const { data } = route.params
-  console.log(data)
+  // const { user } = useSelector((state) => state.auth);
+  const { newOrder } = route.params;
+  console.log(newOrder);
+  const dispatch = useDispatch();
+
+  const handleOrder = async () => {
+    const response = await dispatch(createOrder(newOrder));
+    if (response.payload.success) {
+      Alert.alert("Đặt hàng thành công!");
+    } else Alert.alert("Không thành công");
+  };
   
   const [product, setProduct] = React.useState([
     {
@@ -38,7 +49,7 @@ const Checkout = ({ route, navigation }) => {
     },
   ]);
 
-  function renderListProduct(product) {
+  function renderListProduct(products) {
     const renderItem = ({ item }) => {
       return (
         <View
@@ -54,7 +65,7 @@ const Checkout = ({ route, navigation }) => {
           }}
         >
           <Image
-            source={item.img}
+            source={{ uri: item.productImg }}
             resizeMode="cover"
             style={{
               width: 70,
@@ -63,9 +74,11 @@ const Checkout = ({ route, navigation }) => {
             }}
           ></Image>
           <View style={{ flex: 1, marginHorizontal: 10 }}>
-            <Text style={{ fontSize: 16, fontWeight: "bold" }}>{item.name}</Text>
-            <Text style={{ marginVertical: 10, fontWeight: "bold" }}>Số lượng: {item.qty}</Text>
-            <Text style={{ fontWeight: "bold" }}>{item.price}</Text>
+            <Text style={{ fontSize: 16, fontWeight: "bold" }}>{item.productName}</Text>
+            <Text style={{ marginVertical: 10, fontWeight: "bold" }}>Số lượng: {item.quantity}</Text>
+            <Text style={{ fontWeight: "bold" }}>
+              {item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
+            </Text>
           </View>
         </View>
       );
@@ -75,26 +88,30 @@ const Checkout = ({ route, navigation }) => {
       <View>
         <Text style={{ textAlign: "center", fontSize: 18, fontWeight: "bold", marginVertical: 10 }}>Đặt Hàng</Text>
         <FlatList
-          data={product}
-          keyExtractor={(item) => item.id.toString()}
+          data={products}
+          keyExtractor={(item) => item.productId.toString()}
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
         ></FlatList>
 
         <View>
           <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
-            <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng</Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right" }}>1.000.000 đ</Text>
+            <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng tiền đơn hàng</Text>
+            <Text style={{ fontWeight: "bold", textAlign: "right" }}>
+              {newOrder.totalPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
+            </Text>
           </View>
         </View>
 
         <View style={{ flexDirection: "row", marginHorizontal: 10, marginVertical: 10 }}>
           <Ionicons name="location" size={15} color="#ebb859"></Ionicons>
-          <Text style={{ marginHorizontal: 10, fontWeight: "bold" }}>Địa chỉ nhận hàng</Text>
+          <Text style={{ marginHorizontal: 10, fontWeight: "bold" }}>Thông tin đặt hàng</Text>
         </View>
         <View style={{ marginHorizontal: 30 }}>
-          <Text>Võ Đức Cảnh | 0223204324</Text>
-          <Text>05 Khái Đông 4, Phường Hòa Hải, Quận Ngũ Hành Sơn, TP.Đà Nẵng</Text>
+          <Text>
+            {newOrder.userName} | {newOrder.phone}
+          </Text>
+          <Text>{newOrder.address}</Text>
         </View>
 
         <View style={{ flexDirection: "row", marginHorizontal: 10, marginVertical: 10 }}>
@@ -110,7 +127,7 @@ const Checkout = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      {renderListProduct(product)}
+      {renderListProduct(newOrder.products)}
       <View style={{ flex: 1, alignItems: "flex-end", flexDirection: "row" }}>
         <TouchableOpacity
           style={{
@@ -121,6 +138,7 @@ const Checkout = ({ route, navigation }) => {
             marginHorizontal: 10,
             marginVertical: 20,
           }}
+          onPress={handleOrder}
         >
           <Text style={{ textAlign: "center", fontWeight: "bold", color: "#fff", fontSize: 16, marginVertical: 12 }}>
             Đặt Hàng

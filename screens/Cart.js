@@ -4,7 +4,6 @@ import { ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-ha
 import images from "../constants/images";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrder } from "../store/slices/orderSlice";
 
 const Cart = ({ route, navigation }) => {
   const { itemCart } = useSelector((state) => state.cart);
@@ -40,9 +39,7 @@ const Cart = ({ route, navigation }) => {
       address: user.address,
       phone: user.phone,
     };
-    console.log("newOrder: ", newOrder);
-    navigation.navigate("Checkout", { data: newOrder});
-    // const response = await dispatch(createOrder());
+    navigation.navigate("Checkout", { newOrder});
   };
 
   function renderListProduct(cart) {
