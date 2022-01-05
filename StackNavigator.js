@@ -37,7 +37,7 @@ const CartStackNavigator = ({ route, navigation }) => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Cart" component={Cart} />
-      <Stack.Screen name="Checkout" component={Checkout} />
+      <Stack.Screen name="Check out" component={Checkout} />
     </Stack.Navigator>
   );
 };
@@ -133,5 +133,6 @@ export {
   TamlyStackNavigator,
   GiaokhoaStackNavigator,
   LaptrinhStackNavigator,
-  ThieunhiStackNavigator
+  ThieunhiStackNavigator,
+  CheckoutStackNavigator
 };
