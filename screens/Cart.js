@@ -72,13 +72,13 @@ const Cart = () => {
             <View style={{ flexDirection: "row", flex: 1, marginTop: 10 }}>
               <View style={styles.qty}>
                 <TouchableOpacity onPress={decreased}>
-                  <Text>-</Text>
+                  <Image source={images.minus} style={{width:13, height:13, tintColor:"#FFF"}}></Image>
                 </TouchableOpacity>
               </View>
               <Text style={{ marginRight: 10, fontWeight: "bold" }}>{item.quantity}</Text>
               <View style={styles.qty}>
                 <TouchableOpacity onPress={increased}>
-                  <Text>+</Text>
+                <Image source={images.plus} style={{width:13, height:13, tintColor:"#FFF"}}></Image>
                 </TouchableOpacity>
               </View>
             </View>
@@ -160,6 +160,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ebb859",
     marginRight: 10,
     borderRadius: 5,
+    paddingVertical:3
   },
   code: {
     flexDirection: "row",

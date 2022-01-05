@@ -24,6 +24,8 @@ export const home = require("../images/home.png");
 export const cart = require("../images/shopping-cart.png");
 export const profile = require("../images/user.png");
 export const setting = require("../images/setting.png");
+export const plus = require("../images/plus.png");
+export const minus = require("../images/minus.png")
 export default{
     trendingbook1,
     icHome,
@@ -50,5 +52,7 @@ export default{
     home,
     cart,
     profile,
-    setting
+    setting,
+    plus,
+    minus,
 }
