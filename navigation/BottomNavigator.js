@@ -8,7 +8,7 @@ import Cart from "../screens/Cart";
 import Profile from "../screens/Profile";
 import Setting from "../screens/Setting";
 import Home from "../screens/Home";
-
+// import CartStackNavigator from "../StackNavigator"
 const Tab = createBottomTabNavigator();
 
 const screenOption = {

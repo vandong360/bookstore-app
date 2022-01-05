@@ -9,7 +9,7 @@ import { createOrder } from "../store/slices/orderSlice";
 const Cart = ({ route, navigation }) => {
   const { itemCart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [cart, setCarts] = React.useState(itemCart);
 
   React.useEffect(() => {
@@ -41,6 +41,7 @@ const Cart = ({ route, navigation }) => {
       phone: user.phone,
     };
     console.log("newOrder: ", newOrder);
+    navigation.navigate("Checkout", { data: newOrder});
     // const response = await dispatch(createOrder());
   };
 
