@@ -19,36 +19,6 @@ const Checkout = ({ route, navigation }) => {
     } else Alert.alert("Không thành công");
   };
   
-  const [product, setProduct] = React.useState([
-    {
-      id: 0,
-      name: "Of Literature and Lattes",
-      img: images.bestseller1,
-      author: "Katherine Reay",
-      price: "350.000 đ",
-      rating: "4.0",
-      qty: "1",
-    },
-    {
-      id: 1,
-      name: "Atlas Of The Heart",
-      img: images.trendingbook1,
-      author: "Katherine Reay",
-      price: "300.000 đ",
-      rating: "4.0",
-      qty: "1",
-    },
-    {
-      id: 2,
-      name: "The Dine Reader",
-      author: "Esther G.Belin ",
-      img: images.bestseller3,
-      rating: "4.0",
-      price: "350.000 đ",
-      qty: "1",
-    },
-  ]);
-
   function renderListProduct(products) {
     const renderItem = ({ item }) => {
       return (
@@ -58,7 +28,7 @@ const Checkout = ({ route, navigation }) => {
             marginVertical: 10,
             marginHorizontal: 10,
             borderColor: "#dbdbdb",
-            borderWidth: 2,
+            borderWidth: 1,
             paddingHorizontal: 10,
             paddingVertical: 10,
             borderRadius: 10,
@@ -74,9 +44,9 @@ const Checkout = ({ route, navigation }) => {
             }}
           ></Image>
           <View style={{ flex: 1, marginHorizontal: 10 }}>
-            <Text style={{ fontSize: 16, fontWeight: "bold" }}>{item.productName}</Text>
-            <Text style={{ marginVertical: 10, fontWeight: "bold" }}>Số lượng: {item.quantity}</Text>
-            <Text style={{ fontWeight: "bold" }}>
+            <Text style={{ fontSize: 16, fontWeight: "bold", flex:1 }}>{item.productName}</Text>
+            <Text style={{ marginVertical: 10, fontWeight: "bold", flex:1 }}>Số lượng: {item.quantity}</Text>
+            <Text style={{ fontWeight: "bold", color: "#ED2629" }}>
               {item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
             </Text>
           </View>
@@ -86,18 +56,33 @@ const Checkout = ({ route, navigation }) => {
 
     return (
       <View>
-        <Text style={{ textAlign: "center", fontSize: 18, fontWeight: "bold", marginVertical: 10 }}>Đặt Hàng</Text>
+        <View style={{flexDirection:"row", marginVertical:10}}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={{flex:1, justifyContent:"center", left:10}}>
+        <Image source={images.back} style={{width:20, height:20}}></Image>
+        </TouchableOpacity>
+        <View style={{flex:1, alignItems:"center"}}>
+        <Text style={{ textAlign: "center", fontSize: 18, fontWeight: "bold", right:10}}>Đặt Hàng</Text>
+        </View>
+        </View>
+        <View style={{height:"62%"}}>
         <FlatList
           data={products}
           keyExtractor={(item) => item.productId.toString()}
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
         ></FlatList>
+        </View>
 
-        <View>
+        <View style={{marginTop:30}}>
+          <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
+            <Text style={{ fontWeight: "bold", flex: 1 }}>Số lượng sách: {products.length}</Text>
+          </View>
+        </View>
+
+        <View style={{marginTop:10}}>
           <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng tiền đơn hàng</Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right" }}>
+            <Text style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>
               {newOrder.totalPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
             </Text>
           </View>
@@ -141,7 +126,7 @@ const Checkout = ({ route, navigation }) => {
           onPress={handleOrder}
         >
           <Text style={{ textAlign: "center", fontWeight: "bold", color: "#fff", fontSize: 16, marginVertical: 12 }}>
-            Đặt Hàng
+            Xác Nhận Đơn Hàng
           </Text>
         </TouchableOpacity>
       </View>
