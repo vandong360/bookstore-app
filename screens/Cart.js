@@ -11,10 +11,17 @@ const Cart = () => {
   const dispatch = useDispatch();
   const [cart, setCarts] = React.useState(itemCart);
 
+  // const [totalPrice, setTotalPrice] = React.useState();
+
   React.useEffect(() => {
     setCarts(itemCart);
     console.log("cart: ", cart);
   }, [itemCart]);
+
+ 
+  const totalPrice = cart.reduce((summedPrice, product )=>
+    summedPrice + product.productPrice*product.quantity,0,
+  );
 
   function renderListProduct(cart) {
     const arr = [];
@@ -114,7 +121,9 @@ const Cart = () => {
         <View style={{ marginTop: 20 }}>
           <View style={{ flexDirection: "row", marginHorizontal: 15, marginBottom: 10 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng</Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>1.000.000 đ</Text>
+            <Text 
+            style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>
+              {totalPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
           </View>
           <View style={{ flexDirection: "row", marginHorizontal: 15, marginBottom: 10 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Giảm giá</Text>
@@ -122,7 +131,9 @@ const Cart = () => {
           </View>
           <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng</Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>1.000.000 đ</Text>
+            <Text 
+            style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>
+              {totalPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
           </View>
         </View>
       </View>
