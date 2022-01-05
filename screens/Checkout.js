@@ -4,7 +4,7 @@ import {  ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-h
 import images from '../constants/images';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const Checkout = () =>{
+const Checkout = ({route,navigaton}) =>{
 
  const [product, setProduct] = React.useState([
      {

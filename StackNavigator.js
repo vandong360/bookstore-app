@@ -30,6 +30,14 @@ const DetailsStackNavigator = () => {
   );
 };
 
+const CheckoutStackNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Checkout" component={Checkout} />
+    </Stack.Navigator>
+  );
+};
+
 const MainStackNavigator = ({ route, navigation }) => {
   return (
     <Stack.Navigator
@@ -49,7 +57,7 @@ const CartStackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Cart" component={Cart} />
-      <Stack.Screen name="Checkout" component={Checkout} />
+      <Stack.Screen name="Check out" component={Checkout} />
     </Stack.Navigator>
   );
 };
@@ -145,5 +153,6 @@ export {
   TamlyStackNavigator,
   GiaokhoaStackNavigator,
   LaptrinhStackNavigator,
-  ThieunhiStackNavigator
+  ThieunhiStackNavigator,
+  CheckoutStackNavigator
 };
