@@ -7,6 +7,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 const Checkout = ({ route, navigation }) => {
   const { data } = route.params
   console.log(data)
+  
   const [product, setProduct] = React.useState([
     {
       id: 0,
