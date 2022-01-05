@@ -58,10 +58,8 @@ const Details = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={{ marginTop: 10, backgroundColor: "#fff" }} onPress={() => navigation.goBack()}>
-        <Text>
-          <Ionicons name="arrow-back" size={20} color="black"></Ionicons>
-        </Text>
+      <TouchableOpacity style={{ marginTop: 10, backgroundColor: "#fff", height:30 }} onPress={() => navigation.goBack()}>
+        <Image source={images.back} style={{width:20, height:20, top:10, left:10}}></Image>
       </TouchableOpacity>
 
       <View style={styles.view}>

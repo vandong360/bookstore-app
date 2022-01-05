@@ -51,52 +51,112 @@ const ProfileStackNavigator = () => {
 };
 const SettingStackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator >
       <Stack.Screen name="Setting" component={Setting} />
     </Stack.Navigator>
   );
 };
 const KhoahocStackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerShown: false,
+    }}>
       <Stack.Screen name="Khoahoc" component={Khoahoc} />
+      <Stack.Screen
+        name="Details"
+        component={Details}
+        options={{
+          headerStyle: { backgroundColor: "#ebb859" },
+          headerTintColor: "#fff",
+        }}
+      />
     </Stack.Navigator>
   );
 };
 const KinhteStackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerShown: false,
+    }}>
       <Stack.Screen name="Kinhte" component={Kinhte} />
+      <Stack.Screen
+        name="Details"
+        component={Details}
+        options={{
+          headerStyle: { backgroundColor: "#ebb859" },
+          headerTintColor: "#fff",
+        }}
+      />
     </Stack.Navigator>
   );
 };
 const TamlyStackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerShown: false,
+    }}>
       <Stack.Screen name="Tamly" component={Tamly} />
+      <Stack.Screen
+        name="Details"
+        component={Details}
+        options={{
+          headerStyle: { backgroundColor: "#ebb859" },
+          headerTintColor: "#fff",
+        }}
+      />
     </Stack.Navigator>
   );
 };
 const GiaokhoaStackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerShown: false,
+    }}>
       <Stack.Screen name="Giaokhoa" component={Giaokhoa} />
+      <Stack.Screen
+        name="Details"
+        component={Details}
+        options={{
+          headerStyle: { backgroundColor: "#ebb859" },
+          headerTintColor: "#fff",
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
 const LaptrinhStackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerShown: false,
+    }}>
       <Stack.Screen name="Laptrinh" component={Laptrinh} />
+      <Stack.Screen
+        name="Details"
+        component={Details}
+        options={{
+          headerStyle: { backgroundColor: "#ebb859" },
+          headerTintColor: "#fff",
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
 const ThieunhiStackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerShown: false,
+    }}>
       <Stack.Screen name="Thieunhi" component={Thieunhi} />
+      <Stack.Screen
+        name="Details"
+        component={Details}
+        options={{
+          headerStyle: { backgroundColor: "#ebb859" },
+          headerTintColor: "#fff",
+        }}
+      />
     </Stack.Navigator>
   );
 };
