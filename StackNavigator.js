@@ -14,7 +14,10 @@ import Login from "./screens/Login";
 import Register from "./screens/Register";
 import Kinhte from "./screens/Kinhte";
 import Tamly from "./screens/Tamly";
+import Thieunhi from "./screens/thieunhi";
+import Laptrinh from "./screens/laptrinh";
 import Giaokhoa from "./screens/Giaokhoa";
+import Checkout from "./screens/Checkout";
 import BottomNavigator from "./navigation/BottomNavigator";
 
 const Stack = createStackNavigator();
@@ -46,6 +49,7 @@ const CartStackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Cart" component={Cart} />
+      <Stack.Screen name="Checkout" component={Checkout} />
     </Stack.Navigator>
   );
 };
@@ -93,6 +97,22 @@ const GiaokhoaStackNavigator = () => {
   );
 };
 
+const LaptrinhStackNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Laptrinh" component={Laptrinh} />
+    </Stack.Navigator>
+  );
+};
+
+const ThieunhiStackNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Thieunhi" component={Thieunhi} />
+    </Stack.Navigator>
+  );
+};
+
 const VanhocStackNavigator = () => {
   return (
     <Stack.Navigator
@@ -124,4 +144,6 @@ export {
   KinhteStackNavigator,
   TamlyStackNavigator,
   GiaokhoaStackNavigator,
+  LaptrinhStackNavigator,
+  ThieunhiStackNavigator
 };
