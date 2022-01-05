@@ -3,15 +3,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import "react-native-gesture-handler";
 
-import Home from "./screens/Home";
 import Cart from "./screens/Cart";
 import Profile from "./screens/Profile";
 import Setting from "./screens/Setting";
 import Khoahoc from "./screens/Khoahoc";
 import Vanhoc from "./screens/Vanhoc";
 import Details from "./screens/Details";
-import Login from "./screens/Login";
-import Register from "./screens/Register";
 import Kinhte from "./screens/Kinhte";
 import Tamly from "./screens/Tamly";
 import Thieunhi from "./screens/thieunhi";
@@ -22,22 +19,6 @@ import BottomNavigator from "./navigation/BottomNavigator";
 
 const Stack = createStackNavigator();
 
-const DetailsStackNavigator = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Detail" component={Details} />
-    </Stack.Navigator>
-  );
-};
-
-const CheckoutStackNavigator = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Checkout" component={Checkout} />
-    </Stack.Navigator>
-  );
-};
-
 const MainStackNavigator = ({ route, navigation }) => {
   return (
     <Stack.Navigator
@@ -47,13 +28,12 @@ const MainStackNavigator = ({ route, navigation }) => {
     >
       <Stack.Screen name="Home" component={BottomNavigator} />
       <Stack.Screen name="Details" component={Details} />
+      <Stack.Screen name="Checkout" component={Checkout} />
     </Stack.Navigator>
   );
 };
 
-
-
-const CartStackNavigator = () => {
+const CartStackNavigator = ({ route, navigation }) => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Cart" component={Cart} />

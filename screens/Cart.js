@@ -8,7 +8,8 @@ import { getCart, updateCart } from "../store/slices/cartSlice";
 
 const Cart = ({route,navigation}) => {
   const { itemCart } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  // const dispatch = useDispatch();
   const [cart, setCarts] = React.useState(itemCart);
 
   // const [totalPrice, setTotalPrice] = React.useState();
@@ -17,10 +18,34 @@ const Cart = ({route,navigation}) => {
     setCarts(itemCart);
   }, [itemCart]);
 
- 
-  const totalPrice = cart.reduce((summedPrice, product )=>
-    summedPrice + product.productPrice*product.quantity,0,
-  );
+  const totalPrice = cart.reduce((summedPrice, product) => summedPrice + product.productPrice * product.quantity, 0);
+  const amount = cart.reduce((amount, product) => amount + product.quantity, 0);
+
+  const submitOrder = async () => {
+    const products = cart.map((c) => {
+      return {
+        productId: c.productId,
+        productName: c.productName,
+        productImg: c.productImg,
+        price: c.productPrice,
+        quantity: c.quantity,
+      };
+    });
+
+    // console.log(products);
+    const newOrder = {
+      userId: user._id,
+      userName: user.name,
+      products: products,
+      amount: amount,
+      totalPrice: totalPrice,
+      address: user.address,
+      phone: user.phone,
+    };
+    console.log("newOrder: ", newOrder);
+    navigation.navigate("Checkout", { data: newOrder});
+    // const response = await dispatch(createOrder());
+  };
 
   function renderListProduct(cart) {
     const arr = [];
