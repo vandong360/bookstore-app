@@ -7,6 +7,8 @@ import {
   KinhteStackNavigator,
   GiaokhoaStackNavigator,
   MainStackNavigator,
+  LaptrinhStackNavigator,
+  ThieunhiStackNavigator
 } from "../StackNavigator";
 import "react-native-gesture-handler";
 import BottomNavigator from "./BottomNavigator";
@@ -56,6 +58,20 @@ const MenuDrawer = ({ navigation, route }) => {
       <Drawer.Screen
         name="Giáo khoa"
         component={GiaokhoaStackNavigator}
+        options={{
+          drawerIcon: ({ color }) => <Ionicons name="book-outline" size={22} color={color} />,
+        }}
+      />
+      <Drawer.Screen
+        name="Lập trình"
+        component={LaptrinhStackNavigator}
+        options={{
+          drawerIcon: ({ color }) => <Ionicons name="book-outline" size={22} color={color} />,
+        }}
+      />
+      <Drawer.Screen
+        name="Thiếu nhi"
+        component={ThieunhiStackNavigator}
         options={{
           drawerIcon: ({ color }) => <Ionicons name="book-outline" size={22} color={color} />,
         }}

@@ -6,7 +6,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart, updateCart } from "../store/slices/cartSlice";
 
-const Cart = () => {
+const Cart = ({route,navigation}) => {
   const { itemCart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [cart, setCarts] = React.useState(itemCart);
@@ -143,6 +143,7 @@ const Cart = () => {
             marginHorizontal: 10,
             marginVertical: 20,
           }}
+          onPress={() => navigation.navigate('Checkout')}
         >
           <Text style={{ textAlign: "center", fontWeight: "bold", color: "#fff", fontSize: 16, marginVertical: 12 }}>
             Mua Hàng
