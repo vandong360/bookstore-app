@@ -119,16 +119,6 @@ const Cart = () => {
         ></FlatList>
 
         <View style={{ marginTop: 20 }}>
-          <View style={{ flexDirection: "row", marginHorizontal: 15, marginBottom: 10 }}>
-            <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng</Text>
-            <Text 
-            style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>
-              {totalPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
-          </View>
-          <View style={{ flexDirection: "row", marginHorizontal: 15, marginBottom: 10 }}>
-            <Text style={{ fontWeight: "bold", flex: 1 }}>Giảm giá</Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>0 đ</Text>
-          </View>
           <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng</Text>
             <Text 
