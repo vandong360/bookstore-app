@@ -4,22 +4,24 @@ import { ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-ha
 import images from "../constants/images";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch, useSelector } from "react-redux";
+import { updateCart } from "../store/slices/cartSlice";
 
 const Cart = ({ route, navigation }) => {
-  const { itemCart } = useSelector((state) => state.cart);
+  const { cart, itemCart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
-  // const dispatch = useDispatch();
-  const [cart, setCarts] = React.useState(itemCart);
+  const dispatch = useDispatch();
+  const [cartArr, setCarts] = React.useState(itemCart);
 
   React.useEffect(() => {
     setCarts(itemCart);
   }, [itemCart]);
 
-  const totalPrice = cart.reduce((summedPrice, product) => summedPrice + product.productPrice * product.quantity, 0);
-  const amount = cart.reduce((amount, product) => amount + product.quantity, 0);
+  const cartId = cart._id;
+  const totalPrice = cartArr.reduce((summedPrice, product) => summedPrice + product.productPrice * product.quantity, 0);
+  const amount = cartArr.reduce((amount, product) => amount + product.quantity, 0);
 
   const submitOrder = async () => {
-    const products = cart.map((c) => {
+    const products = cartArr.map((c) => {
       return {
         productId: c.productId,
         productName: c.productName,
@@ -39,35 +41,47 @@ const Cart = ({ route, navigation }) => {
       address: user.address,
       phone: user.phone,
     };
-    navigation.navigate("Checkout", { newOrder});
+    navigation.navigate("Checkout", { newOrder });
   };
 
   function renderListProduct(cart) {
     const arr = [];
-    let ncart = arr.concat(cart);
+    let products = arr.concat(cart);
 
     function renderItem({ item, index }) {
-      const decreased = () => {
+      const decreased = async () => {
         if (item.quantity > 1) {
-          let obj = ncart[index];
+          let obj = products[index];
           let nobj = { ...obj };
           nobj.quantity = item.quantity - 1;
-          ncart.splice(index, 1, nobj);
-          setCarts(ncart);
+          products.splice(index, 1, nobj);
+          setCarts(products);
+
+          //cap nhat len mongodb
+          const values = { cartId, products };
+          await dispatch(updateCart(values));
         }
       };
 
-      const increased = () => {
-        let obj = ncart[index];
+      const increased = async () => {
+        let obj = products[index];
         let nobj = { ...obj };
         nobj.quantity = item.quantity + 1;
-        ncart.splice(index, 1, nobj);
-        setCarts(ncart);
+        products.splice(index, 1, nobj);
+        setCarts(products);
+
+        //cap nhat len mongodb
+        const values = { cartId, products };
+        await dispatch(updateCart(values));
       };
 
-      const removeItem = () => {
-        ncart.splice(index, 1);
-        setCarts(ncart);
+      const removeItem = async () => {
+        products.splice(index, 1);
+        setCarts(products);
+
+        //cap nhat len mongodb
+        const values = { cartId, products };
+        await dispatch(updateCart(values));
       };
 
       return (
@@ -137,7 +151,7 @@ const Cart = ({ route, navigation }) => {
     return (
       <View style={{ height: "80%", marginBottom: 20 }}>
         <FlatList
-          data={cart}
+          data={cartArr}
           keyExtractor={(item) => item._id.toString()}
           renderItem={renderItem}
           showsVerticalScrollIndicator={true}
@@ -157,7 +171,7 @@ const Cart = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      {renderListProduct(cart)}
+      {renderListProduct(cartArr)}
       <View style={{ flex: 1, alignItems: "flex-end", flexDirection: "row", marginBottom: 50 }}>
         <TouchableOpacity
           style={{
