@@ -9,9 +9,31 @@ import { getCart, updateCart } from "../store/slices/cartSlice";
 const Cart = () => {
   const { itemCart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const [qty, setQty] = React.useState();
+  const [cart, setCarts] = React.useState(itemCart);
 
-  function renderListProduct(itemCart) {
-    const renderItem = ({ item }) => {
+  React.useEffect(() => {
+    setCarts(itemCart);
+    console.log("cart: ", cart);
+  }, [itemCart]);
+
+  function renderListProduct(cart) {
+    function renderItem({ item, index }) {
+      // const renderQty = (qtty) => {
+      //   setQty(qtty);
+      // }
+      const decreased = () => {
+        console.log(index);
+
+        if (item.quantity > 1) {
+          // setQty(qty - 1);
+        }
+      };
+
+      const increased = () => {
+        setQty(qty + 1);
+      };
+
       return (
         <View
           style={{
@@ -19,72 +41,84 @@ const Cart = () => {
             marginVertical: 10,
             marginHorizontal: 10,
             borderColor: "#dbdbdb",
-            borderWidth: 2,
+            borderWidth: 1,
             paddingHorizontal: 10,
             paddingVertical: 10,
             borderRadius: 10,
           }}
         >
+          {/* {renderQty} */}
           <Image
             source={{ uri: item.productImg }}
             resizeMode="cover"
             style={{
-              width: 70,
-              height: 100,
+              width: 80,
+              height: 120,
               borderRadius: 10,
             }}
           ></Image>
-          <View style={{ flex: 1, marginHorizontal: 10 }}>
-            <Text style={{ fontSize: 16, fontWeight: "bold" }}>{item.productName}</Text>
-            <Text style={{ marginVertical: 10 }}>
-              <Ionicons name="star" size={15} color="#ebb859"></Ionicons>
-              {item.productDiscount}
-            </Text>
-            <View style={{ flexDirection: "row" }}>
+
+          <View style={{ marginHorizontal: 10, flex: 1 }}>
+            <View style={{ flex: 1 }}>
+              <Text style={{ fontSize: 15, fontWeight: "bold", flex: 1 }}>{item.productName}</Text>
+            </View>
+
+            <View style={{ height: 45 }}>
+              <View style={styles.discount}>
+                <Text style={{ fontWeight: "bold", color: "#FFF" }}>{item.productDiscount} %</Text>
+              </View>
+            </View>
+
+            <View style={{ flexDirection: "row", flex: 1, marginTop: 10 }}>
               <View style={styles.qty}>
-                <Text>-</Text>
+                <TouchableOpacity onPress={decreased}>
+                  <Text>-</Text>
+                </TouchableOpacity>
               </View>
               <Text style={{ marginRight: 10, fontWeight: "bold" }}>{item.quantity}</Text>
               <View style={styles.qty}>
-                <Text>+</Text>
+                <TouchableOpacity onPress={increased}>
+                  <Text>+</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
+
           <View>
-            <View style={{flex:1}}>
-                <Text style={{ textAlign: "right", fontWeight: "bold" }}>X
-                </Text>
+            <View style={{ flex: 1 }}>
+              <Text style={{ textAlign: "right", fontWeight: "bold" }}>X</Text>
             </View>
-            <View style={{flex:1, justifyContent:"flex-end"}}>
-                <Text style={{ fontWeight: "bold", color:"#ED2629"}}>
-                {item.productPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}  đ
-                </Text></View>
+            <View style={{ flex: 1, justifyContent: "flex-end" }}>
+              <Text style={{ fontWeight: "bold", color: "#ED2629" }}>
+                {item.productPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
+              </Text>
+            </View>
           </View>
         </View>
       );
-    };
- 
+    }
+
     return (
-      <View>
+      <View style={{ height: "80%", marginBottom: 20 }}>
         <FlatList
-          data={itemCart}
+          data={cart}
           keyExtractor={(item) => item._id.toString()}
           renderItem={renderItem}
           showsVerticalScrollIndicator={true}
         ></FlatList>
 
-        <View style={{marginTop:20, }}>
+        <View style={{ marginTop: 20 }}>
           <View style={{ flexDirection: "row", marginHorizontal: 15, marginBottom: 10 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng</Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right", color:"#ED2629" }}>1.000.000 đ</Text>
+            <Text style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>1.000.000 đ</Text>
           </View>
           <View style={{ flexDirection: "row", marginHorizontal: 15, marginBottom: 10 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Giảm giá</Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right", color:"#ED2629" }}>0 đ</Text>
+            <Text style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>0 đ</Text>
           </View>
           <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Tổng</Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right", color:"#ED2629" }}>1.000.000 đ</Text>
+            <Text style={{ fontWeight: "bold", textAlign: "right", color: "#ED2629" }}>1.000.000 đ</Text>
           </View>
         </View>
       </View>
@@ -93,7 +127,7 @@ const Cart = () => {
 
   return (
     <View style={styles.container}>
-      {renderListProduct(itemCart)}
+      {renderListProduct(cart)}
       <View style={{ flex: 1, alignItems: "flex-end", flexDirection: "row", marginBottom: 50 }}>
         <TouchableOpacity
           style={{
@@ -136,6 +170,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 25,
     borderRadius: 10,
+  },
+  discount: {
+    flex: 1,
+    width: 45,
+    height: 15,
+    backgroundColor: "#DE3538",
+    alignItems: "center",
+    borderRadius: 5,
+    marginBottom: 10,
+    marginTop: 10,
+    justifyContent: "center",
   },
 });
 
