@@ -13,7 +13,6 @@ const Cart = () => {
 
   React.useEffect(() => {
     setCarts(itemCart);
-    console.log("cart: ", cart);
   }, [itemCart]);
 
   function renderListProduct(cart) {
@@ -21,21 +20,22 @@ const Cart = () => {
     let ncart = arr.concat(cart);
 
     function renderItem({ item, index }) {
-
-
       const decreased = () => {
         if (item.quantity > 1) {
-          // setQty(qty - 1);
-          let rm = ncart.splice(index, 1);
-          rm.quantity = 5
-          console.log(rm)
+          let obj = ncart[index];
+          let nobj = { ...obj }
+          nobj.quantity = item.quantity - 1;
+          ncart.splice(index, 1, nobj);
           setCarts(ncart);
-
         }
       };
 
       const increased = () => {
-        setQty(qty + 1);
+        let obj = ncart[index];
+        let nobj = { ...obj };
+        nobj.quantity = item.quantity + 1;
+        ncart.splice(index, 1, nobj);
+        setCarts(ncart);
       };
 
       return (
@@ -76,13 +76,13 @@ const Cart = () => {
             <View style={{ flexDirection: "row", flex: 1, marginTop: 10 }}>
               <View style={styles.qty}>
                 <TouchableOpacity onPress={decreased}>
-                  <Image source={images.minus} style={{width:13, height:13, tintColor:"#FFF"}}></Image>
+                  <Image source={images.minus} style={{ width: 13, height: 13, tintColor: "#FFF" }}></Image>
                 </TouchableOpacity>
               </View>
               <Text style={{ marginRight: 10, fontWeight: "bold" }}>{item.quantity}</Text>
               <View style={styles.qty}>
                 <TouchableOpacity onPress={increased}>
-                <Image source={images.plus} style={{width:13, height:13, tintColor:"#FFF"}}></Image>
+                  <Image source={images.plus} style={{ width: 13, height: 13, tintColor: "#FFF" }}></Image>
                 </TouchableOpacity>
               </View>
             </View>
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ebb859",
     marginRight: 10,
     borderRadius: 5,
-    paddingVertical:3
+    paddingVertical: 3,
   },
   code: {
     flexDirection: "row",
