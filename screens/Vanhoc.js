@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image, Dimensions, Button } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { getByCategory } from "../store/slices/productSlice";
 
 // import NewsCard from '../Components/NewsCard';
 import newAPI from "../apis/API";
@@ -9,21 +10,23 @@ const { width, height } = Dimensions.get("window");
 
 const Vanhoc = ({ navigation }) => {
   const [news, setNews] = useState([]);
+  const { products } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getNewsFromAPI();
+    dispatch(getByCategory());
   }, []);
 
-  function getNewsFromAPI() {
-    newAPI
-      .get("dashboard/get?category=van-hoc")
-      .then(async function (response) {
-        setNews(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+  // function getNewsFromAPI() {
+  //   newAPI
+  //     .get("dashboard/get?category=van-hoc")
+  //     .then(async function (response) {
+  //       setNews(response.data);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }
 
   if (!news) {
     return null;

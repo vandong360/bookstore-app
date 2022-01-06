@@ -34,7 +34,7 @@ export const getUserOrders = createAsyncThunk("order/user/get", async (userId, t
 
 const initialState = {
   message: null,
-  order: null,
+  allOrder: null,
 };
 
 const orderSlice = createSlice({
@@ -48,7 +48,7 @@ const orderSlice = createSlice({
       state.message = action.payload.message;
     },
     [getUserOrders.fulfilled]: (state, action) => {
-      state.order = action.payload.order;
+      state.allOrder = action.payload.order;
       state.message = action.payload.message;
     },
   },

@@ -4,7 +4,7 @@ import { ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-ha
 import images from "../constants/images";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrder } from "../store/slices/orderSlice";
+import { createOrder, getUserOrders } from "../store/slices/orderSlice";
 import { getCart, updateCart } from "../store/slices/cartSlice";
 
 const Checkout = ({ route, navigation }) => {
@@ -23,6 +23,7 @@ const Checkout = ({ route, navigation }) => {
       const values = { cartId, products };
       await dispatch(updateCart(values));
       await dispatch(getCart(user._id));
+      await dispatch(getUserOrders(user._id));
     } else Alert.alert("Không thành công");
   };
 

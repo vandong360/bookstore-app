@@ -1,61 +1,76 @@
-import React from 'react';
-import { View, Text, FlatList } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import React from "react";
+import { RefreshControl, View, Text, FlatList, StyleSheet } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserOrders } from "../store/slices/orderSlice";
+import moment from "moment";
 
-const DaHuy = () =>{
+const DaHuy = () => {
+  const { user } = useSelector((state) => state.auth);
+  const { allOrder } = useSelector((state) => state.order);
+  const [refreshing, setRefreshing] = React.useState(false);
+  const dispatch = useDispatch();
 
-    const [data,setData] = React.useState([
-        {
-            id: 1,
-            date:"06/01/2022",
-            product: "1 Thủy hử, 2 Đắc nhân tâm",
-            price: "300000",
-            status: "Đã hủy"
-        },
-        {
-            id: 2,
-            date:"02/01/2022",
-            product: "1 Tây du ký, 2 Kim bình mai",
-            price: "300000",
-            status: "Đã hủy"
-        }
-    ])
+  React.useEffect(() => {
+    async function getOrder() {
+      await dispatch(getUserOrders(user._id));
+    }
+    getOrder();
+  }, []);
 
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await dispatch(getUserOrders(user._id));
+    setRefreshing(false);
+  };
 
-        const renderItem = ({item}) =>{
-            return(
-                <TouchableOpacity>
-                <View style={{
-                                marginVertical:10, 
-                                marginHorizontal:10,
-                                borderColor:'#dbdbdb',
-                                borderWidth:2,
-                                paddingHorizontal:10,
-                                paddingVertical:10,
-                                borderRadius:10
-                                }}>
-                    <View style={{flex:1, marginHorizontal:10}}>
-                        <Text style={{fontSize:16, fontWeight:'bold'}}>Ngày đặt hàng: {item.date}</Text>
-                        <Text style={{marginVertical:10, fontWeight:'bold'}}>Sản phẩm: {item.product}</Text>
-                        <Text style={{fontWeight:'bold'}}>Tổng giá: {item.price}</Text>
-                        <Text style={{fontWeight:'bold', marginTop:10}}>Trạng thái: {item.status}</Text>
-                    </View>
-                </View>
-                </TouchableOpacity>
-            )
-        }
+  //tab cancel order
+  const renderItem = ({ item }) => {
+    if (item.status === "cancel") {
+      return (
+        <View style={styles.itemStyle}>
+          <View style={{ flex: 1, marginHorizontal: 10 }}>
+            <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+              Ngày đặt hàng: {moment(item.createdAt).format("LL")}
+            </Text>
+            <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+              Đã huỷ đơn ngày: {moment(item.updatedAt).format("LL")}
+            </Text>
+            <Text style={{ marginVertical: 10, fontWeight: "bold" }}>Số sản phẩm: {item.amount}</Text>
+            <Text style={{ fontWeight: "bold" }}>Tổng giá: {item.totalPrice} đ</Text>
+            <Text style={{ fontWeight: "bold", marginTop: 10 }}>Trạng thái: Đã huỷ đơn</Text>
+          </View>
+        </View>
+      );
+    } else return <></>;
+  };
 
-    return (
+  return (
     <View>
-            <FlatList 
-                data={data}
-                keyExtractor={item => item.id.toString()}
-                renderItem={renderItem}
-                showsVerticalScrollIndicator={false}
-                >
-                </FlatList>
+      {allOrder === null || refreshing === true ? (
+        <Text>Waiting</Text>
+      ) : (
+        <FlatList
+          data={allOrder}
+          keyExtractor={(item) => item._id.toString()}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        />
+      )}
     </View>
-    )
-}
+  );
+};
 
-export default DaHuy
+const styles = StyleSheet.create({
+  itemStyle: {
+    marginVertical: 10,
+    marginHorizontal: 10,
+    borderColor: "#dbdbdb",
+    borderWidth: 2,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderRadius: 10,
+  },
+});
+export default DaHuy;
