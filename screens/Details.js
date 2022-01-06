@@ -4,7 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Rating from "../Components/rating";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart, updateCart } from "../store/slices/cartSlice";
-import images from "../constants/images"; 
+import images from "../constants/images";
 
 const dataItem = (productId, productImg, productName, productPrice, productDiscount, quantity) => {
   return { productId, productImg, productName, productPrice, productDiscount, quantity };
@@ -30,34 +30,44 @@ const Details = ({ route, navigation }) => {
     itemCart.map((item) => {
       groupId.push(item.productId);
     });
-    console.log(groupId);
-
-    const checking = groupId.indexOf(bookId);
-    console.log(checking);
-
+    const index = groupId.indexOf(bookId);
+    return index;
   };
 
   const handleAddCart = async () => {
+    const index = checkItem(book._id);
     const cartId = cart._id;
     const item = dataItem(book._id, book.image, book.name, book.price, book.discount, Quantity);
 
     const p = [];
     let products = p.concat(itemCart);
-    products.push(item);
+    console.log("index: ", index);
+
+    if (index !== -1) {
+      let obj = products[index];
+      let nobj = { ...obj };
+      nobj.quantity = nobj.quantity + Quantity;
+      products.splice(index, 1, nobj);
+    } else {
+      products.push(item);
+    }
 
     const values = { cartId, products };
     const response = await dispatch(updateCart(values));
 
     if (response.payload.success) {
+      Alert.alert("Đã thêm vào giỏ hàng");
       await dispatch(getCart(user._id));
-      Alert.alert('Đã thêm vào giỏ hàng')
-    } else Alert.alert('Không thành công');
+    } else Alert.alert("Không thành công");
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={{ marginTop: 10, backgroundColor: "#fff", height:30 }} onPress={() => navigation.goBack()}>
-        <Image source={images.back} style={{width:20, height:20, top:10, left:10}}></Image>
+      <TouchableOpacity
+        style={{ marginTop: 10, backgroundColor: "#fff", height: 30 }}
+        onPress={() => navigation.goBack()}
+      >
+        <Image source={images.back} style={{ width: 20, height: 20, top: 10, left: 10 }}></Image>
       </TouchableOpacity>
 
       <View style={styles.view}>
@@ -116,12 +126,14 @@ const Details = ({ route, navigation }) => {
             <Text style={{ textAlign: "center", fontWeight: "bold" }}>QTY</Text>
           </View>
           <View style={{ flexDirection: "row", paddingLeft: 40 }}>
-            <TouchableOpacity onPress={decreased} style={{marginTop:6}} >
-            <Image source={images.minus} style={{width:13, height:13}}></Image>
+            <TouchableOpacity onPress={decreased} style={{ marginTop: 6 }}>
+              <Image source={images.minus} style={{ width: 13, height: 13 }}></Image>
             </TouchableOpacity>
-            <View ><Text style={{ marginHorizontal:15, fontWeight:"bold", fontSize:16}}>{Quantity}</Text></View>
-            <TouchableOpacity onPress={increased} style={{marginTop:6}} >
-            <Image source={images.plus} style={{width:13, height:13}}></Image>
+            <View>
+              <Text style={{ marginHorizontal: 15, fontWeight: "bold", fontSize: 16 }}>{Quantity}</Text>
+            </View>
+            <TouchableOpacity onPress={increased} style={{ marginTop: 6 }}>
+              <Image source={images.plus} style={{ width: 13, height: 13 }}></Image>
             </TouchableOpacity>
           </View>
         </View>
