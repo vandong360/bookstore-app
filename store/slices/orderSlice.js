@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const createOrder = createAsyncThunk("order/created", async (values ,thunkAPI) => {
+export const createOrder = createAsyncThunk("order/created", async (values, thunkAPI) => {
   try {
     const api = "https://bookstore360.herokuapp.com/orders/";
     const response = await axios.post(api, values);
@@ -16,50 +16,25 @@ export const createOrder = createAsyncThunk("order/created", async (values ,thun
   }
 });
 
-// export const getAll = createAsyncThunk("dashboard/orders/", async (thunkAPI) => {
-//   try {
-//     const data = await OrderService.getAllOrder();
-//     if (data.success) {
-//       return data;
-//     } else {
-//       return thunkAPI.rejectWithValue(data);
-//     }
-//   } catch (error) {
-//     console.log(error.response.message);
-//     return thunkAPI.rejectWithValue(error.response.message);
-//   }
-// });
+export const getUserOrders = createAsyncThunk("order/user/get", async (userId, thunkAPI) => {
+  try {
+    const api = "https://bookstore360.herokuapp.com/orders/user/";
 
-// export const changeStatus = createAsyncThunk("dashboard/orders/changeStatus/:id", async ({ id, status }, thunkAPI) => {
-//   try {
-//     const data = await OrderService.changeStatus(id, status);
-//     if (data.success) {
-//       return data;
-//     } else {
-//       return thunkAPI.rejectWithValue(data);
-//     }
-//   } catch (error) {
-//     console.log(error.response.message);
-//     return thunkAPI.rejectWithValue(error.response.message);
-//   }
-// });
-
-// export const getOneOrder = createAsyncThunk("dashboard/orders/getOne", async (id, thunkAPI) => {
-//   try {
-//     const data = await OrderService.getOneOrder(id);
-//     if (data.success) {
-//       return data;
-//     } else {
-//       return thunkAPI.rejectWithValue(data);
-//     }
-//   } catch (error) {
-//     console.log(error.response.message);
-//     return thunkAPI.rejectWithValue(error.response.message);
-//   }
-// });
+    const response = await axios.get(api + `${userId}`);
+    if (response.data.success) {
+      return response.data;
+    } else {
+      return thunkAPI.rejectWithValue(response.data);
+    }
+  } catch (error) {
+    console.log(error);
+    return thunkAPI.rejectWithValue(error);
+  }
+});
 
 const initialState = {
   message: null,
+  order: null,
 };
 
 const orderSlice = createSlice({
@@ -70,6 +45,10 @@ const orderSlice = createSlice({
       state.message = action.payload.message;
     },
     [createOrder.rejected]: (state, action) => {
+      state.message = action.payload.message;
+    },
+    [getUserOrders.fulfilled]: (state, action) => {
+      state.order = action.payload.order;
       state.message = action.payload.message;
     },
   },

@@ -41,7 +41,6 @@ const Details = ({ route, navigation }) => {
 
     const p = [];
     let products = p.concat(itemCart);
-    console.log("index: ", index);
 
     if (index !== -1) {
       let obj = products[index];
