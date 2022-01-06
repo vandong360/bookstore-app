@@ -5,20 +5,27 @@ import images from "../constants/images";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../store/slices/orderSlice";
+import { getCart, updateCart } from "../store/slices/cartSlice";
 
 const Checkout = ({ route, navigation }) => {
-  // const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
+  const { cart } = useSelector((state) => state.cart);
   const { newOrder } = route.params;
-  console.log(newOrder);
   const dispatch = useDispatch();
 
   const handleOrder = async () => {
     const response = await dispatch(createOrder(newOrder));
     if (response.payload.success) {
       Alert.alert("Đặt hàng thành công!");
+
+      const cartId = cart._id
+      const products = []
+      const values = { cartId, products };
+      await dispatch(updateCart(values));
+      await dispatch(getCart(user._id));
     } else Alert.alert("Không thành công");
   };
-  
+
   function renderListProduct(products) {
     const renderItem = ({ item }) => {
       return (
@@ -44,8 +51,8 @@ const Checkout = ({ route, navigation }) => {
             }}
           ></Image>
           <View style={{ flex: 1, marginHorizontal: 10 }}>
-            <Text style={{ fontSize: 16, fontWeight: "bold", flex:1 }}>{item.productName}</Text>
-            <Text style={{ marginVertical: 10, fontWeight: "bold", flex:1 }}>Số lượng: {item.quantity}</Text>
+            <Text style={{ fontSize: 16, fontWeight: "bold", flex: 1 }}>{item.productName}</Text>
+            <Text style={{ marginVertical: 10, fontWeight: "bold", flex: 1 }}>Số lượng: {item.quantity}</Text>
             <Text style={{ fontWeight: "bold", color: "#ED2629" }}>
               {item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
             </Text>
@@ -76,7 +83,7 @@ const Checkout = ({ route, navigation }) => {
         <View style={{ marginTop: 30 }}>
           <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
             <Text style={{ fontWeight: "bold", flex: 1 }}>Số lượng sách </Text>
-            <Text style={{ fontWeight: "bold", textAlign: "right"}}>{products.length}</Text>
+            <Text style={{ fontWeight: "bold", textAlign: "right" }}>{products.length}</Text>
           </View>
         </View>
 

@@ -41,34 +41,6 @@ export const logout = createAsyncThunk("logout", (thunkAPI) => {
   return Logout;
 });
 
-// export const getAllUser = createAsyncThunk("dashboard/users/", async (thunkAPI) => {
-//   try {
-//     const data = await AuthService.getAllUser();
-//     if (data.success) {
-//       return data;
-//     } else {
-//       return thunkAPI.rejectWithValue(data);
-//     }
-//   } catch (error) {
-//     console.log(error.response.message);
-//     return thunkAPI.rejectWithValue(error.response.message);
-//   }
-// });
-
-// export const deleteUser = createAsyncThunk("dashboard/users/delete", async (id, thunkAPI) => {
-//   try {
-//     const data = await AuthService.delUser(id);
-//     if (data.success) {
-//       return data;
-//     } else {
-//       return thunkAPI.rejectWithValue(data);
-//     }
-//   } catch (error) {
-//     console.log(error.response.message);
-//     return thunkAPI.rejectWithValue(error.response.message);
-//   }
-// });
-
 const initialState = { isAuthenticated: false, user: null, message: null };
 
 const authSlice = createSlice({
