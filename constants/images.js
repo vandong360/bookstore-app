@@ -28,6 +28,7 @@ export const plus = require("../images/plus.png");
 export const minus = require("../images/minus.png");
 export const close = require("../images/close.png");
 export const back = require("../images/back.png");
+export const note = require("../images/notes.png");
 
 export default{
     trendingbook1,
@@ -59,5 +60,6 @@ export default{
     plus,
     minus,
     close,
-    back
+    back,
+    note
 }

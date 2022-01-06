@@ -80,7 +80,7 @@ const BottomNavigator = ({navigation,route}) => {
         }}
       />
       <Tab.Screen
-        name="Cài đặt"
+        name="Quản Lý Đơn Hàng"
         component={Setting}
         options={{
           headerStyle: { backgroundColor: "#ebb859" },
@@ -88,7 +88,7 @@ const BottomNavigator = ({navigation,route}) => {
           tabBarIcon: ({ focused }) => {
             return (
               <Image
-                source={images.setting}
+                source={images.note}
                 style={{
                   tintColor: focused ? "#ebb859" : "#dbdbdb", width:23, height:23
                 }}
