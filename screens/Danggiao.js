@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const Setting = () =>{
+const Danggiao = () =>{
 
     const [data,setData] = React.useState([
         {
@@ -10,14 +10,14 @@ const Setting = () =>{
             date:"06/01/2022",
             product: "1 Thủy hử, 2 Đắc nhân tâm",
             price: "300000",
-            status: "Chờ xác nhận"
+            status: "Đang giao"
         },
         {
             id: 2,
             date:"02/01/2022",
             product: "1 Tây du ký, 2 Kim bình mai",
             price: "300000",
-            status: "Chờ xác nhận"
+            status: "Đang giao"
         }
     ])
 
@@ -58,4 +58,4 @@ const Setting = () =>{
     )
 }
 
-export default Setting
+export default Danggiao

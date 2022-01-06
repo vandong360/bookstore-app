@@ -10,7 +10,7 @@ import Login from "./screens/Login";
 import Register from "./screens/Register";
 import BottomNavigator from "./navigation/BottomNavigator";
 import { useSelector } from "react-redux";
-import Profile from "./screens/Profile";
+
 
 const Stack = createStackNavigator();
 

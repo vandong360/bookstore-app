@@ -8,6 +8,8 @@ import Cart from "../screens/Cart";
 import Profile from "../screens/Profile";
 import Setting from "../screens/Setting";
 import Home from "../screens/Home";
+
+import Toptabs from "./Toptabs.js";
 // import CartStackNavigator from "../StackNavigator"
 const Tab = createBottomTabNavigator();
 
@@ -81,7 +83,7 @@ const BottomNavigator = ({navigation,route}) => {
       />
       <Tab.Screen
         name="Quản Lý Đơn Hàng"
-        component={Setting}
+        component={Toptabs}
         options={{
           headerStyle: { backgroundColor: "#ebb859" },
           headerTintColor: "#fff",
