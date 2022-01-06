@@ -11,7 +11,6 @@ import {
   ThieunhiStackNavigator
 } from "../StackNavigator";
 import "react-native-gesture-handler";
-import BottomNavigator from "./BottomNavigator";
 import CustomDrawer from "./CustomDrawer";
 import Ionicons from "react-native-vector-icons/Ionicons";
 

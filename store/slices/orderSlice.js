@@ -32,6 +32,24 @@ export const getUserOrders = createAsyncThunk("order/user/get", async (userId, t
   }
 });
 
+export const cancelOrder = createAsyncThunk("order/user/cancel", async (orderId, thunkAPI) => {
+  try {
+    const api = "https://bookstore360.herokuapp.com/dashboard/orders/";
+    const status = {
+      status: "cancel"
+    };
+    const response = await axios.put(api + `${orderId}`, status);
+    if (response.data.success) {
+      return response.data;
+    } else {
+      return thunkAPI.rejectWithValue(response.data);
+    }
+  } catch (error) {
+    console.log(error);
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 const initialState = {
   message: null,
   allOrder: null,
@@ -49,6 +67,13 @@ const orderSlice = createSlice({
     },
     [getUserOrders.fulfilled]: (state, action) => {
       state.allOrder = action.payload.order;
+      state.message = action.payload.message;
+    },
+
+    [cancelOrder.fulfilled]: (state, action) => {
+      state.message = action.payload.message;
+    },
+    [cancelOrder.rejected]: (state, action) => {
       state.message = action.payload.message;
     },
   },

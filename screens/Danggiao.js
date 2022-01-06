@@ -34,7 +34,7 @@ const Danggiao = () => {
               Ngày đặt hàng: {moment(item.createdAt).format("LL")}
             </Text>
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-              Started {moment(item.updatedAt).startOf("day").fromNow()}...
+              Started shipping {moment(item.updatedAt).startOf("day").fromNow()}...
             </Text>
             <Text style={{ marginVertical: 10, fontWeight: "bold" }}>Số sản phẩm: {item.amount}</Text>
             <Text style={{ fontWeight: "bold" }}>Tổng giá: {item.totalPrice} đ</Text>

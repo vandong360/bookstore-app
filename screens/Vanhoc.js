@@ -1,64 +1,57 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image, Dimensions, Button } from "react-native";
+import React, { useEffect } from "react";
+import { RefreshControl, View, Text, TouchableOpacity, FlatList, StyleSheet, Image, Dimensions } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { getByCategory } from "../store/slices/productSlice";
-
-// import NewsCard from '../Components/NewsCard';
-import newAPI from "../apis/API";
+import { getAllProduct } from "../store/slices/productSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const { width, height } = Dimensions.get("window");
 
-const Vanhoc = ({ navigation }) => {
-  const [news, setNews] = useState([]);
+const Vanhoc = ({ route, navigation }) => {
+  // const { type } = route.params;
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
+  const [refreshing, setRefreshing] = React.useState(false);
 
   useEffect(() => {
-    dispatch(getByCategory());
+    async function getProducts() {
+      await dispatch(getAllProduct());
+    }
+    getProducts();
   }, []);
 
-  // function getNewsFromAPI() {
-  //   newAPI
-  //     .get("dashboard/get?category=van-hoc")
-  //     .then(async function (response) {
-  //       setNews(response.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await dispatch(getAllProduct());
+    setRefreshing(false);
+  };
 
-  if (!news) {
-    return null;
-  }
-
-  function renderProducts(item, index) {
-    return (
-      <View style={styles.cardView}>
-        <TouchableOpacity onPress={() => navigation.navigate("Details", { book: item })}>
-          <Text style={styles.title}> {item.name}</Text>
-          <Text style={styles.author}>{item.author} </Text>
-
-          {/* <Image style={styles.image} source = {{uri: item.urlToImage}}/> */}
-          <Image style={styles.image} source={item.image ? { uri: item.image } : null} />
-          <View style={styles.discount}>
-            <Text
-              style={{
-                color: "white",
-                fontWeight: "bold",
-                marginVertical: 13,
-                textAlign: "center",
-                fontSize: 14,
-              }}
-            >
-              {item.discount}%
-            </Text>
-          </View>
-          <Text style={styles.price}>{item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
-          <Text style={styles.oldPrice}>{item.oldPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
-        </TouchableOpacity>
-      </View>
-    );
+  function renderProducts(item) {
+    if (item.category === "van-hoc") {
+      return (
+        <View style={styles.cardView}>
+          <TouchableOpacity onPress={() => navigation.navigate("Details", { book: item })}>
+            <Text style={styles.title}> {item.name}</Text>
+            <Text style={styles.author}>{item.author} </Text>
+            <Image style={styles.image} source={item.image ? { uri: item.image } : null} />
+            <View style={styles.discount}>
+              <Text
+                style={{
+                  color: "white",
+                  fontWeight: "bold",
+                  marginVertical: 13,
+                  textAlign: "center",
+                  fontSize: 14,
+                }}
+              >
+                {item.discount}%
+              </Text>
+            </View>
+            <Text style={styles.price}>{item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
+            <Text style={styles.oldPrice}>{item.oldPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else <></>
   }
 
   return (
@@ -71,15 +64,13 @@ const Vanhoc = ({ navigation }) => {
           Văn Học
         </Text>
       </View>
-
       <FlatList
-        data={news.products}
+        data={products}
         numColumns={2}
         keyExtractor={(item, index) => "key" + index}
         renderItem={({ item, index }) => renderProducts(item, index)}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
-
-      {/* <Button onPress={()=>navigation.navigate('Details')} title="next"/> */}
     </View>
   );
 };

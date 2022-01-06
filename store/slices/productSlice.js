@@ -37,6 +37,18 @@ export const getByCategory = createAsyncThunk("dashboard/get/category", async (c
   }
 });
 
+// get api top rating book for home screen
+export const getAllProduct = createAsyncThunk("dashboard/get/all", async (thunkAPI) => {
+  try {
+    const api = "https://bookstore360.herokuapp.com/dashboard/product";
+    const response = await axios.get(api);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 const initialState = {
   message: null,
   newProducts: null,
@@ -57,7 +69,11 @@ const productSlice = createSlice({
     },
 
     [getByCategory.fulfilled]: (state, action) => {
-      state.hotProducts = action.payload.products;
+      state.products = action.payload.products;
+    },
+
+    [getAllProduct.fulfilled]: (state, action) => {
+      state.products = action.payload.products;
     },
   },
 });

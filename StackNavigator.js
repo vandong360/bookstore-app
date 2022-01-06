@@ -58,10 +58,12 @@ const SettingStackNavigator = () => {
 };
 const KhoahocStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false,
-    }}>
-      <Stack.Screen name="Khoahoc" component={Khoahoc} />
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Khoahoc" component={Khoahoc} initialParams={{ type: "khoa-hoc" }} />
       <Stack.Screen
         name="Details"
         component={Details}
@@ -75,10 +77,12 @@ const KhoahocStackNavigator = () => {
 };
 const KinhteStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false,
-    }}>
-      <Stack.Screen name="Kinhte" component={Kinhte} />
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Kinhte" component={Kinhte} initialParams={{ type: "kinh-te" }} />
       <Stack.Screen
         name="Details"
         component={Details}
@@ -92,10 +96,12 @@ const KinhteStackNavigator = () => {
 };
 const TamlyStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false,
-    }}>
-      <Stack.Screen name="Tamly" component={Tamly} />
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Tamly" component={Tamly} initialParams={{ type: "tam-ly" }} />
       <Stack.Screen
         name="Details"
         component={Details}
@@ -109,10 +115,12 @@ const TamlyStackNavigator = () => {
 };
 const GiaokhoaStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false,
-    }}>
-      <Stack.Screen name="Giaokhoa" component={Giaokhoa} />
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Giaokhoa" component={Giaokhoa} initialParams={{ type: "giao-khoa" }} />
       <Stack.Screen
         name="Details"
         component={Details}
@@ -127,10 +135,12 @@ const GiaokhoaStackNavigator = () => {
 
 const LaptrinhStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false,
-    }}>
-      <Stack.Screen name="Laptrinh" component={Laptrinh} />
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Laptrinh" component={Laptrinh} initialParams={{ type: "lap-trinh" }} />
       <Stack.Screen
         name="Details"
         component={Details}
@@ -145,10 +155,12 @@ const LaptrinhStackNavigator = () => {
 
 const ThieunhiStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false,
-    }}>
-      <Stack.Screen name="Thieunhi" component={Thieunhi} />
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Thieunhi" component={Thieunhi} initialParams={{ type: "thieu-nhi" }} />
       <Stack.Screen
         name="Details"
         component={Details}
@@ -168,7 +180,7 @@ const VanhocStackNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Vanhoc" component={Vanhoc} />
+      <Stack.Screen name="Vanhoc" component={Vanhoc} initialParams={{ type: "van-hoc" }} />
       <Stack.Screen
         name="Details"
         component={Details}

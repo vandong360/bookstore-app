@@ -44,7 +44,7 @@ const Setting = () => {
 
   return (
     <View>
-      {allOrder === null || refreshing === true ? (
+      {allOrder === null ? (
         <Text>Waiting</Text>
       ) : (
         <FlatList
