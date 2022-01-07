@@ -28,19 +28,24 @@ const Dagiao = () => {
   const renderItem = ({ item }) => {
     if (item.status === "delivered") {
       return (
-        <View style={styles.itemStyle}>
+        <TouchableOpacity>
+          <View style={styles.itemStyle}>
           <View style={{ flex: 1, marginHorizontal: 10 }}>
-            <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+            <Text style={{ fontSize: 16, fontWeight: "bold", color:"#161717", textAlign:"center" }}>
               Ngày đặt hàng: {moment(item.createdAt).format("LL")}
             </Text>
-            <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-              Đã giao hàng ngày: {moment(item.updatedAt).format("LL")}
-            </Text>
-            <Text style={{ marginVertical: 10, fontWeight: "bold" }}>Số sản phẩm: {item.amount}</Text>
-            <Text style={{ fontWeight: "bold" }}>Tổng giá: {item.totalPrice} đ</Text>
-            <Text style={{ fontWeight: "bold", marginTop: 10 }}>Trạng thái: Đã giao hàng</Text>
+            <Text style={{ marginVertical: 10, fontWeight: "bold", color:"#2E3030"  }}>Số sản phẩm: {item.amount}</Text>
+            <View style={{flexDirection:"row"}}>
+            <Text style={{ fontWeight: "bold", color:"#2E3030"  }}>Tổng giá: </Text>
+            <Text style={{fontWeight: "bold", color:"#C91A1D"}}>{item.totalPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
+            </View>
+            <View style={{flexDirection:"row"}}>
+            <Text style={{ fontWeight: "bold", marginTop: 10, color:"#2E3030"  }}>Trạng thái: </Text>
+            <Text style={{ fontWeight: "bold", marginTop: 10, color:"#0F9400"  }}>Đã giao</Text>
+            </View>
           </View>
         </View>
+        </TouchableOpacity>
       );
     } else return <></>;
   };
@@ -65,9 +70,8 @@ const Dagiao = () => {
 const styles = StyleSheet.create({
   itemStyle: {
     marginVertical: 10,
-    marginHorizontal: 10,
-    borderColor: "#dbdbdb",
-    borderWidth: 2,
+    marginHorizontal: 14,
+    backgroundColor:"#FFF",
     paddingHorizontal: 10,
     paddingVertical: 10,
     borderRadius: 10,

@@ -24,6 +24,8 @@ const Tamly = ({ navigation }) => {
     setRefreshing(false);
   };
 
+  
+
   function renderProducts(item, index) {
     if (item.category === "tam-ly") {
       return (
@@ -52,7 +54,7 @@ const Tamly = ({ navigation }) => {
       );
     } else <></>
   }
-
+  
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: "row", height: 50, backgroundColor: "#ebb859", marginBottom: 20 }}>
@@ -69,6 +71,7 @@ const Tamly = ({ navigation }) => {
         numColumns={2}
         keyExtractor={(item, index) => "key" + index}
         renderItem={({ item, index }) => renderProducts(item, index)}
+        
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
     </View>
@@ -78,6 +81,7 @@ const Tamly = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 30,
+    marginBottom:70
   },
   cardView: {
     width: "48%",
@@ -129,7 +133,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     justifyContent: "flex-start",
     position: "absolute",
-
+    left:"70%",
     marginTop: 70,
   },
 });

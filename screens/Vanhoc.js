@@ -66,6 +66,8 @@ const Vanhoc = ({ route, navigation }) => {
       </View>
       <FlatList
         data={products}
+        contentContainerStyle={{margin:4}}
+        horizontal={false}
         numColumns={2}
         keyExtractor={(item, index) => "key" + index}
         renderItem={({ item, index }) => renderProducts(item, index)}
@@ -78,6 +80,7 @@ const Vanhoc = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 30,
+    marginBottom:70
   },
   cardView: {
     width: "48%",
@@ -89,6 +92,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowOpacity: 0.5,
     shadowRadius: 3,
+    
   },
   title: {
     marginHorizontal: width * 0.03,
@@ -129,7 +133,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     justifyContent: "flex-start",
     position: "absolute",
-
+    left:"70%",
     marginTop: 70,
   },
 });
