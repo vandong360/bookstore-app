@@ -29,6 +29,10 @@ export const minus = require("../images/minus.png");
 export const close = require("../images/close.png");
 export const back = require("../images/back.png");
 export const note = require("../images/notes.png");
+export const bin = require("../images/bin.png");
+export const danggiao = require("../images/fast-delivery.png");
+export const choxacnhan = require("../images/confirmation.png");
+export const dagiao = require("../images/delivered.png");
 
 export default{
     trendingbook1,
@@ -61,5 +65,9 @@ export default{
     minus,
     close,
     back,
-    note
+    note,
+    choxacnhan,
+    danggiao,
+    dagiao,
+    bin
 }
