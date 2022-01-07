@@ -11,13 +11,13 @@ const Vanhoc = ({ route, navigation }) => {
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = React.useState(false);
+  let data = [];
 
-  useEffect(() => {
-    async function getProducts() {
-      await dispatch(getAllProduct());
+  for (let item of products) {
+    if (item.category === "van-hoc") {
+      data.push(item);
     }
-    getProducts();
-  }, []);
+  }
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -26,7 +26,6 @@ const Vanhoc = ({ route, navigation }) => {
   };
 
   function renderProducts(item) {
-    if (item.category === "van-hoc") {
       return (
         <View style={styles.cardView}>
           <TouchableOpacity onPress={() => navigation.navigate("Details", { book: item })}>
@@ -51,7 +50,6 @@ const Vanhoc = ({ route, navigation }) => {
           </TouchableOpacity>
         </View>
       );
-    } else <></>
   }
 
   return (
@@ -65,8 +63,8 @@ const Vanhoc = ({ route, navigation }) => {
         </Text>
       </View>
       <FlatList
-        data={products}
-        contentContainerStyle={{margin:4}}
+        data={data}
+        contentContainerStyle={{ margin: 4 }}
         horizontal={false}
         numColumns={2}
         keyExtractor={(item, index) => "key" + index}
@@ -80,7 +78,7 @@ const Vanhoc = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 30,
-    marginBottom:70
+    marginBottom: 70,
   },
   cardView: {
     width: "48%",
@@ -92,7 +90,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowOpacity: 0.5,
     shadowRadius: 3,
-    
   },
   title: {
     marginHorizontal: width * 0.03,
@@ -133,7 +130,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     justifyContent: "flex-start",
     position: "absolute",
-    left:"70%",
+    left: "70%",
     marginTop: 70,
   },
 });

@@ -11,12 +11,13 @@ const Khoahoc = ({ navigation }) => {
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = React.useState(false);
 
-  useEffect(() => {
-    async function getProducts() {
-      await dispatch(getAllProduct());
+  let data = [];
+
+  for (let item of products) {
+    if (item.category === "khoa-hoc") {
+      data.push(item);
     }
-    getProducts();
-  }, []);
+  }
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -25,32 +26,30 @@ const Khoahoc = ({ navigation }) => {
   };
 
   function renderProducts(item, index) {
-    if (item.category === "khoa-hoc") {
-      return (
-        <View style={styles.cardView}>
-          <TouchableOpacity onPress={() => navigation.navigate("Details", { book: item })}>
-            <Text style={styles.title}> {item.name}</Text>
-            <Text style={styles.author}>{item.author} </Text>
-            <Image style={styles.image} source={item.image ? { uri: item.image } : null} />
-            <View style={styles.discount}>
-              <Text
-                style={{
-                  color: "white",
-                  fontWeight: "bold",
-                  marginVertical: 13,
-                  textAlign: "center",
-                  fontSize: 14,
-                }}
-              >
-                {item.discount}%
-              </Text>
-            </View>
-            <Text style={styles.price}>{item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
-            <Text style={styles.oldPrice}>{item.oldPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
-          </TouchableOpacity>
-        </View>
-      );
-    } else <></>;
+    return (
+      <View style={styles.cardView}>
+        <TouchableOpacity onPress={() => navigation.navigate("Details", { book: item })}>
+          <Text style={styles.title}> {item.name}</Text>
+          <Text style={styles.author}>{item.author} </Text>
+          <Image style={styles.image} source={item.image ? { uri: item.image } : null} />
+          <View style={styles.discount}>
+            <Text
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                marginVertical: 13,
+                textAlign: "center",
+                fontSize: 14,
+              }}
+            >
+              {item.discount}%
+            </Text>
+          </View>
+          <Text style={styles.price}>{item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
+          <Text style={styles.oldPrice}>{item.oldPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 
   return (
@@ -65,7 +64,7 @@ const Khoahoc = ({ navigation }) => {
       </View>
 
       <FlatList
-        data={products}
+        data={data}
         numColumns={2}
         keyExtractor={(item, index) => "key" + index}
         renderItem={({ item, index }) => renderProducts(item, index)}
