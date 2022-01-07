@@ -13,14 +13,6 @@ const Result = ({ route, navigation }) => {
 
   const text = key.toLowerCase();
 
-  // let arrName = [];
-  // products.map((item) => {
-  //   arrName.push(item.name.toLowerCase());
-  // });
-  // const index = arrName.indexOf(text);
-
-  // const p = [];
-  // let arr = p.concat(products);
   let result = [];
 
   for (let item of products) {
