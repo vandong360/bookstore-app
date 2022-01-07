@@ -42,11 +42,11 @@ const Profile = () => {
         >
           <View style={styles.content}>
             <View
-              style={{ alignItems: "center", borderBottomWidth: 1, borderBottomColor: "#dbdbdb", paddingBottom: 30 }}
+              style={{ alignItems: "center", borderBottomWidth: 1, borderBottomColor: "#dbdbdb", paddingBottom: 20 }}
             >
               <Image
                 source={images.avtDrawer}
-                style={{ width: 130, height: 130, borderRadius: 65, marginTop: 50 }}
+                style={{ width: 130, height: 130, borderRadius: 65, marginTop: 40 }}
               ></Image>
               <Text style={{ textAlign: "center", fontSize: 14 }}>{user !== null ? user.username : ''}</Text>
             </View>
@@ -78,7 +78,7 @@ const Profile = () => {
               </View>
             </View>
 
-            <View style={{ marginTop: 30 }}>
+            <View style={{ marginTop: 20 }}>
               <View style={{ marginLeft: 20, flexDirection: "row" }}>
                 <Image
                   source={images.phone}
@@ -105,7 +105,7 @@ const Profile = () => {
               </View>
             </View>
 
-            <View style={{ marginTop: 30 }}>
+            <View style={{ marginTop: 20 }}>
               <View style={{ flexDirection: "row", marginLeft: 20 }}>
                 <Image
                   source={images.address}
@@ -132,7 +132,8 @@ const Profile = () => {
                 />
               </View>
             </View>
-
+            
+            <View style={{flexDirection:"row", paddingLeft:20}}>
             <TouchableOpacity
               onPress={() => handleEdit()}
               style={{
@@ -150,7 +151,7 @@ const Profile = () => {
             <TouchableOpacity
               onPress={handleUpdate}
               style={{
-                width: 70,
+                width: 120,
                 height: 40,
                 backgroundColor: "orange",
                 left: "40%",
@@ -161,6 +162,7 @@ const Profile = () => {
             >
               <Text style={{ textAlign: "center", fontWeight: "bold", color: "#FFF" }}>Lưu thay đổi</Text>
             </TouchableOpacity>
+            </View>
           </View>
         </KeyboardAvoidingView>
       </ImageBackground>
