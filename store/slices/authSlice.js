@@ -41,6 +41,21 @@ export const logout = createAsyncThunk("logout", (thunkAPI) => {
   return Logout;
 });
 
+export const updateUser = createAsyncThunk("auth/user/updated", async ({userId, values}, thunkAPI) => {
+  try {
+    const api = "https://bookstore360.herokuapp.com/auth/update/";
+    const response = await axios.put(api + `${userId}`, values);
+    if (response.data.success) {
+      return response.data;
+    } else {
+      return thunkAPI.rejectWithValue();
+    }
+  } catch (error) {
+    console.log(error);
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 const initialState = { isAuthenticated: false, user: null, message: null };
 
 const authSlice = createSlice({
@@ -71,6 +86,9 @@ const authSlice = createSlice({
     [logout.fulfilled]: (state, action) => {
       state.isAuthenticated = false;
       state.user = null;
+    },
+
+    [updateUser.fulfilled]: (state, action) => {
     },
   },
 });
