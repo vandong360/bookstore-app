@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserOrders } from "../store/slices/orderSlice";
 import moment from "moment";
 
-const Danggiao = () => {
+const Danggiao = ({route, navigation}) => {
   const { user } = useSelector((state) => state.auth);
   const { allOrder } = useSelector((state) => state.order);
   const [refreshing, setRefreshing] = React.useState(false);
@@ -28,7 +28,7 @@ const Danggiao = () => {
   const renderItem = ({ item }) => {
     if (item.status === "shipping") {
       return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("OrderDetails", {order: item })}>
           <View style={styles.itemStyle}>
           <View style={{ flex: 1, marginHorizontal: 10 }}>
             <Text style={{ fontSize: 16, fontWeight: "bold", color:"#161717", textAlign:"center" }}>

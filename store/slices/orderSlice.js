@@ -36,7 +36,7 @@ export const cancelOrder = createAsyncThunk("order/user/cancel", async (orderId,
   try {
     const api = "https://bookstore360.herokuapp.com/dashboard/orders/";
     const status = {
-      status: "cancel"
+      status: "canceled"
     };
     const response = await axios.put(api + `${orderId}`, status);
     if (response.data.success) {
