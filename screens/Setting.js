@@ -30,21 +30,25 @@ const Setting = () => {
       return (
         <TouchableOpacity>
           <View style={styles.itemStyle}>
-          <View style={{ flex: 1, marginHorizontal: 10 }}>
-            <Text style={{ fontSize: 16, fontWeight: "bold", color:"#161717", textAlign:"center" }}>
-              Ngày đặt hàng: {moment(item.createdAt).format("LL")}
-            </Text>
-            <Text style={{ marginVertical: 10, fontWeight: "bold", color:"#232424"  }}>Số sản phẩm: {item.amount}</Text>
-            <View style={{flexDirection:"row"}}>
-            <Text style={{ fontWeight: "bold", color:"#232424"  }}>Tổng giá: </Text>
-            <Text style={{fontWeight: "bold", color:"#C91A1D"}}>{item.totalPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
-            </View>
-            <View style={{flexDirection:"row"}}>
-            <Text style={{ fontWeight: "bold", marginTop: 10, color:"#232424"  }}>Trạng thái: </Text>
-            <Text style={{ fontWeight: "bold", marginTop: 10, color:"#0F9400"  }}>Đang chờ xác nhận</Text>
+            <View style={{ flex: 1, marginHorizontal: 10 }}>
+              <Text style={{ fontSize: 16, fontWeight: "bold", color: "#161717", textAlign: "center" }}>
+                Ngày đặt hàng: {moment(item.createdAt).format("LL")}
+              </Text>
+              <Text style={{ marginVertical: 10, fontWeight: "bold", color: "#717272" }}>
+                Số sản phẩm: {item.amount}
+              </Text>
+              <View style={{ flexDirection: "row" }}>
+                <Text style={{ fontWeight: "bold", color: "#717272" }}>Tổng giá: </Text>
+                <Text style={{ fontWeight: "bold", color: "#C91A1D" }}>
+                  {item.totalPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ
+                </Text>
+              </View>
+              <View style={{ flexDirection: "row" }}>
+                <Text style={{ fontWeight: "bold", marginTop: 10, color: "#717272" }}>Trạng thái: </Text>
+                <Text style={{ fontWeight: "bold", marginTop: 10, color: "#0F9400" }}>Đang chờ xác nhận</Text>
+              </View>
             </View>
           </View>
-        </View>
         </TouchableOpacity>
       );
     } else return <></>;
@@ -53,7 +57,7 @@ const Setting = () => {
   return (
     <View style={styles.container}>
       {allOrder === null ? (
-        <Text>Waiting</Text>
+        <Text>Waiting...</Text>
       ) : (
         <FlatList
           data={allOrder}
@@ -71,14 +75,14 @@ const styles = StyleSheet.create({
   itemStyle: {
     marginVertical: 10,
     marginHorizontal: 14,
-    backgroundColor:"#FFF",
+    backgroundColor: "#FFF",
     paddingHorizontal: 10,
     paddingVertical: 10,
     borderRadius: 10,
   },
-  container:{
-    marginTop:20
-  }
+  container: {
+    marginTop: 20,
+  },
 });
 
 export default Setting;

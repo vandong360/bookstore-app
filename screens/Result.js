@@ -7,52 +7,53 @@ import { useDispatch, useSelector } from "react-redux";
 const { width, height } = Dimensions.get("window");
 
 const Result = ({ route, navigation }) => {
-  const { key } = route.params;
-  console.log("key: ", key)
   const { products } = useSelector((state) => state.products);
-  const dispatch = useDispatch();
-  const [refreshing, setRefreshing] = React.useState(false);
+  const { key } = route.params;
 
-  useEffect(() => {
-    async function getProducts() {
-      await dispatch(getAllProduct());
+  const text = key.toLowerCase();
+
+  // let arrName = [];
+  // products.map((item) => {
+  //   arrName.push(item.name.toLowerCase());
+  // });
+  // const index = arrName.indexOf(text);
+
+  // const p = [];
+  // let arr = p.concat(products);
+  let result = [];
+
+  for (let item of products) {
+    if (item.name.toLowerCase().indexOf(text) > -1) {
+      result.push(item);
+      console.log("ket qua: ", result);
     }
-    getProducts();
-  }, []);
-
-  const onRefresh = async () => {
-    setRefreshing(true);
-    await dispatch(getAllProduct());
-    setRefreshing(false);
-  };
+  }
 
   function renderProducts(item) {
-    if (item.category === "van-hoc") {
-      return (
-        <View style={styles.cardView}>
-          <TouchableOpacity onPress={() => navigation.navigate("Details", { book: item })}>
-            <Text style={styles.title}> {item.name}</Text>
-            <Text style={styles.author}>{item.author} </Text>
-            <Image style={styles.image} source={item.image ? { uri: item.image } : null} />
-            <View style={styles.discount}>
-              <Text
-                style={{
-                  color: "white",
-                  fontWeight: "bold",
-                  marginVertical: 13,
-                  textAlign: "center",
-                  fontSize: 14,
-                }}
-              >
-                {item.discount}%
-              </Text>
-            </View>
-            <Text style={styles.price}>{item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
-            <Text style={styles.oldPrice}>{item.oldPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
-          </TouchableOpacity>
-        </View>
-      );
-    } else <></>;
+    return (
+      <View style={styles.cardView}>
+        <TouchableOpacity onPress={() => navigation.navigate("Details", { book: item })}>
+          <Text style={styles.title}> {item.name}</Text>
+          <Text style={styles.author}>{item.author} </Text>
+          <Image style={styles.image} source={item.image ? { uri: item.image } : null} />
+          <View style={styles.discount}>
+            <Text
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                marginVertical: 13,
+                textAlign: "center",
+                fontSize: 14,
+              }}
+            >
+              {item.discount}%
+            </Text>
+          </View>
+          <Text style={styles.price}>{item.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
+          <Text style={styles.oldPrice}>{item.oldPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 
   return (
@@ -66,11 +67,10 @@ const Result = ({ route, navigation }) => {
         </Text>
       </View>
       <FlatList
-        data={products}
+        data={result}
         numColumns={2}
         keyExtractor={(item, index) => "key" + index}
         renderItem={({ item, index }) => renderProducts(item, index)}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
     </View>
   );

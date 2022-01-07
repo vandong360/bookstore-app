@@ -39,7 +39,7 @@ const CartStackNavigator = ({ route, navigation }) => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Cart" component={Cart} />
-      <Stack.Screen name="Check out" component={Checkout} />
+      <Stack.Screen name="Checkout" component={Checkout} />
     </Stack.Navigator>
   );
 };

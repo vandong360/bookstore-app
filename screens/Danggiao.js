@@ -34,13 +34,13 @@ const Danggiao = () => {
             <Text style={{ fontSize: 16, fontWeight: "bold", color:"#161717", textAlign:"center" }}>
               Ngày đặt hàng: {moment(item.createdAt).format("LL")}
             </Text>
-            <Text style={{ marginVertical: 10, fontWeight: "bold", color:"#161717"  }}>Số sản phẩm: {item.amount}</Text>
+            <Text style={{ marginVertical: 10, fontWeight: "bold", color:"#717272"  }}>Số sản phẩm: {item.amount}</Text>
             <View style={{flexDirection:"row"}}>
-            <Text style={{ fontWeight: "bold", color:"#161717"  }}>Tổng giá: </Text>
+            <Text style={{ fontWeight: "bold", color:"#717272"  }}>Tổng giá: </Text>
             <Text style={{fontWeight: "bold", color:"#C91A1D"}}>{item.totalPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
             </View>
             <View style={{flexDirection:"row"}}>
-            <Text style={{ fontWeight: "bold", marginTop: 10, color:"#161717"  }}>Trạng thái: </Text>
+            <Text style={{ fontWeight: "bold", marginTop: 10, color:"#717272"  }}>Trạng thái: </Text>
             <Text style={{ fontWeight: "bold", marginTop: 10, color:"#0F9400"  }}>Đang giao</Text>
             </View>
           </View>
@@ -52,8 +52,8 @@ const Danggiao = () => {
 
   return (
     <View>
-      {allOrder === null || refreshing === true ? (
-        <Text>Waiting</Text>
+      {allOrder === null ? (
+        <Text>Waiting...</Text>
       ) : (
         <FlatList
           data={allOrder}

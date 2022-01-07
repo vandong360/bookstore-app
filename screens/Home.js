@@ -6,7 +6,7 @@ import { TextInput } from "react-native-gesture-handler";
 import Rating from "../Components/rating";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getNewProd, getHotProd } from "../store/slices/productSlice";
+import { getNewProd, getHotProd, getAllProduct } from "../store/slices/productSlice";
 import { getCart } from "../store/slices/cartSlice";
 
 const Home = ({ route, navigation }) => {
@@ -17,6 +17,7 @@ const Home = ({ route, navigation }) => {
   const [search, setSearch] = React.useState("");
 
   useEffect(() => {
+    dispatch(getAllProduct());
     dispatch(getNewProd());
     dispatch(getHotProd());
     dispatch(getCart(user._id));
