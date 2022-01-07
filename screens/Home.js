@@ -11,9 +11,10 @@ import { getCart } from "../store/slices/cartSlice";
 
 const Home = ({ route, navigation }) => {
   const dispatch = useDispatch();
-  const { newProducts, hotProducts } = useSelector((state) => state.products);
+  const { newProducts, hotProducts, products } = useSelector((state) => state.products);
   const { user } = useSelector((state) => state.auth);
   const [refreshing, setRefreshing] = React.useState(false);
+  const [search, setSearch] = React.useState("");
 
   useEffect(() => {
     dispatch(getNewProd());
@@ -21,7 +22,6 @@ const Home = ({ route, navigation }) => {
     dispatch(getCart(user._id));
   }, []);
 
-  
   const onRefresh = async () => {
     setRefreshing(true);
     await dispatch(getNewProd());
@@ -61,6 +61,10 @@ const Home = ({ route, navigation }) => {
         break;
       }
     }
+  };
+
+  const handleSearch = () => {
+    navigation.navigate("Result", { key: search })
   };
 
   //component new book
@@ -228,10 +232,18 @@ const Home = ({ route, navigation }) => {
 
       <View style={styles.search}>
         <View style={{ marginTop: 7, marginLeft: 3 }}>
-          <Ionicons name="search" size={20} color="#ebb859"></Ionicons>
+          <TouchableOpacity onPress={handleSearch}>
+            <Ionicons name="search" size={20} color="#ebb859"></Ionicons>
+          </TouchableOpacity>
         </View>
-        <TextInput placeholder="Search" style={{ marginLeft: 10, marginVertical: 10 }}></TextInput>
+        <TextInput
+          placeholder="Search"
+          style={{ marginLeft: 10, marginVertical: 10 }}
+          onChangeText={(search) => setSearch(search)}
+          value={search}
+        ></TextInput>
       </View>
+
       <FlatList
         ListHeaderComponent={renderNewProducts(newProducts)}
         ListFooterComponent={renderHotProducts(hotProducts)}

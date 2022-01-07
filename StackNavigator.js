@@ -15,6 +15,7 @@ import Thieunhi from "./screens/thieunhi";
 import Laptrinh from "./screens/laptrinh";
 import Giaokhoa from "./screens/Giaokhoa";
 import Checkout from "./screens/Checkout";
+import Result from "./screens/Result";
 import BottomNavigator from "./navigation/BottomNavigator";
 
 const Stack = createStackNavigator();
@@ -29,6 +30,7 @@ const MainStackNavigator = ({ route, navigation }) => {
       <Stack.Screen name="Home" component={BottomNavigator} />
       <Stack.Screen name="Details" component={Details} />
       <Stack.Screen name="Checkout" component={Checkout} />
+      <Stack.Screen name="Result" component={Result} />
     </Stack.Navigator>
   );
 };

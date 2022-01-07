@@ -26,7 +26,7 @@ const Dagiao = () => {
 
   //tab delived order
   const renderItem = ({ item }) => {
-    if (item.status === "delived") {
+    if (item.status === "delivered") {
       return (
         <View style={styles.itemStyle}>
           <View style={{ flex: 1, marginHorizontal: 10 }}>

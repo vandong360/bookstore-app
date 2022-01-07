@@ -26,7 +26,7 @@ const DaHuy = () => {
 
   //tab cancel order
   const renderItem = ({ item }) => {
-    if (item.status === "cancel") {
+    if (item.status === "canceled") {
       return (
         <View style={styles.itemStyle}>
           <View style={{ flex: 1, marginHorizontal: 10 }}>
