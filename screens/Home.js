@@ -232,17 +232,17 @@ const Home = ({ route, navigation }) => {
       </View>
 
       <View style={styles.search}>
-        <View style={{ marginTop: 7, marginLeft: 3 }}>
-          <TouchableOpacity onPress={handleSearch}>
-            <Ionicons name="search" size={20} color="#ebb859"></Ionicons>
-          </TouchableOpacity>
-        </View>
         <TextInput
-          placeholder="Search"
-          style={{ marginLeft: 10, marginVertical: 10 }}
+          placeholder="Tìm kiếm"
+          style={{ marginLeft: 10, marginVertical: 10, width:"100%", height:"100%" }}
           onChangeText={(search) => setSearch(search)}
           value={search}
         ></TextInput>
+        <View style={{ marginTop: 7, marginLeft: 3 }}>
+          <TouchableOpacity onPress={handleSearch} style={{right:"200%", bottom:5}}>
+            <Image source={images.search} style={{width:25, height:25, tintColor:"#ebb859"}}></Image>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <FlatList
@@ -262,13 +262,14 @@ const styles = StyleSheet.create({
   },
   search: {
     flexDirection: "row",
-    width: "95%",
-    height: 40,
+    width: "94%",
+    height: 50,
     borderColor: "#dbdbdb",
     borderWidth: 1,
     marginHorizontal: 10,
     marginTop: 10,
-    borderRadius: 5,
+    borderRadius: 10,
+    alignItems:"center"
   },
   trendingshadow: {
     backgroundColor: "#FFF",

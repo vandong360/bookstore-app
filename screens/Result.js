@@ -3,6 +3,7 @@ import { RefreshControl, View, Text, TouchableOpacity, FlatList, StyleSheet, Ima
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { getAllProduct } from "../store/slices/productSlice";
 import { useDispatch, useSelector } from "react-redux";
+import images from "../constants/images";
 
 const { width, height } = Dimensions.get("window");
 
@@ -23,6 +24,7 @@ const Result = ({ route, navigation }) => {
 
   function renderProducts(item) {
     return (
+      
       <View style={styles.cardView}>
         <TouchableOpacity onPress={() => navigation.navigate("Details", { book: item })}>
           <Text style={styles.title}> {item.name}</Text>
@@ -45,19 +47,25 @@ const Result = ({ route, navigation }) => {
           <Text style={styles.oldPrice}>{item.oldPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")} đ</Text>
         </TouchableOpacity>
       </View>
+      
     );
   }
 
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: "row", height: 50, backgroundColor: "#ebb859", marginBottom: 20 }}>
-        <TouchableOpacity style={{ marginHorizontal: 5, marginVertical: 10 }} onPress={() => navigation.openDrawer()}>
-          <Ionicons name="menu-outline" size={25} color="#fff"></Ionicons>
-        </TouchableOpacity>
+      <TouchableOpacity
+      style={{ height: 30, marginTop:5 }}
+      onPress={() => navigation.goBack()}
+    >
+      <Image source={images.back} style={{ width: 20, height: 20, top: 10, left: 10, tintColor:"#FFF" }}></Image>
+    </TouchableOpacity>
         <Text style={{ marginHorizontal: 90, marginTop: 10, fontSize: 20, fontWeight: "bold", color: "#fff" }}>
           Kết quả tìm kiếm
         </Text>
+        
       </View>
+      
       <FlatList
         data={result}
         numColumns={2}
@@ -73,7 +81,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   cardView: {
-    width: "48%",
+    width: "50%",
     marginHorizontal: 4,
     backgroundColor: "white",
     margin: width * 0.03,

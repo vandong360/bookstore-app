@@ -33,6 +33,7 @@ export const bin = require("../images/bin.png");
 export const danggiao = require("../images/fast-delivery.png");
 export const choxacnhan = require("../images/confirmation.png");
 export const dagiao = require("../images/delivered.png");
+export const search = require("../images/search.png");
 
 export default{
     trendingbook1,
@@ -69,5 +70,6 @@ export default{
     choxacnhan,
     danggiao,
     dagiao,
-    bin
+    bin,
+    search
 }
