@@ -16,6 +16,7 @@ import Laptrinh from "./screens/laptrinh";
 import Giaokhoa from "./screens/Giaokhoa";
 import Checkout from "./screens/Checkout";
 import Result from "./screens/Result";
+import OrderDetails from "./screens/OrderDetails";
 import BottomNavigator from "./navigation/BottomNavigator";
 
 const Stack = createStackNavigator();
@@ -31,6 +32,7 @@ const MainStackNavigator = ({ route, navigation }) => {
       <Stack.Screen name="Details" component={Details} />
       <Stack.Screen name="Checkout" component={Checkout} />
       <Stack.Screen name="Result" component={Result} />
+      <Stack.Screen name="OrderDetails" component={OrderDetails}/>
     </Stack.Navigator>
   );
 };
@@ -55,6 +57,7 @@ const SettingStackNavigator = () => {
   return (
     <Stack.Navigator >
       <Stack.Screen name="Setting" component={Setting} />
+      <Stack.Screen name="Order Details" component={OrderDetails}/>
     </Stack.Navigator>
   );
 };

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserOrders } from "../store/slices/orderSlice";
 import moment from "moment";
 
-const Setting = () => {
+const Setting = ({ route, navigation }) => {
   const { user } = useSelector((state) => state.auth);
   const { allOrder } = useSelector((state) => state.order);
   const [refreshing, setRefreshing] = React.useState(false);
@@ -28,7 +28,7 @@ const Setting = () => {
   const renderItem = ({ item }) => {
     if (item.status === "waiting") {
       return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("OrderDetails", {order: item })}>
           <View style={styles.itemStyle}>
           <View style={{ flex: 1, marginHorizontal: 10 }}>
             <Text style={{ fontSize: 16, fontWeight: "bold", color:"#161717", textAlign:"center" }}>
@@ -70,7 +70,7 @@ const Setting = () => {
 const styles = StyleSheet.create({
   itemStyle: {
     marginVertical: 10,
-    marginHorizontal: 14,
+    marginHorizontal: 10,
     backgroundColor:"#FFF",
     paddingHorizontal: 10,
     paddingVertical: 10,
