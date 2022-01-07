@@ -28,7 +28,7 @@ export const login = createAsyncThunk("auth/user/login", async ({ username, pass
     if (response.data.success) {
       return response.data;
     } else {
-      return thunkAPI.rejectWithValue(response.data);
+      return thunkAPI.rejectWithValue();
     }
   } catch (error) {
     console.log(error);
@@ -61,13 +61,11 @@ const authSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       state.isAuthenticated = true;
       state.user = action.payload.user;
-      state.message = action.payload.message;
     },
 
     [login.rejected]: (state, action) => {
       state.isAuthenticated = false;
       state.user = null;
-      state.message = action.payload.message;
     },
 
     [logout.fulfilled]: (state, action) => {

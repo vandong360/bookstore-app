@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, RefreshControl } from "react-native";
 import images from "../constants/images";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { TextInput } from "react-native-gesture-handler";
@@ -13,12 +13,22 @@ const Home = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const { newProducts, hotProducts } = useSelector((state) => state.products);
   const { user } = useSelector((state) => state.auth);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   useEffect(() => {
     dispatch(getNewProd());
     dispatch(getHotProd());
     dispatch(getCart(user._id));
   }, []);
+
+  
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await dispatch(getNewProd());
+    await dispatch(getHotProd());
+    await dispatch(getCart(user._id));
+    setRefreshing(false);
+  };
 
   const convertCategory = (category) => {
     switch (category) {
@@ -225,10 +235,8 @@ const Home = ({ route, navigation }) => {
       <FlatList
         ListHeaderComponent={renderNewProducts(newProducts)}
         ListFooterComponent={renderHotProducts(hotProducts)}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       ></FlatList>
-      {/* <View>{renderNewProducts(newProducts)}</View>
-
-      <View style={{ marginLeft: 12 }}>{renderHotProducts(hotProducts)}</View> */}
     </View>
   );
 };

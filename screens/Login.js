@@ -12,12 +12,16 @@ const Login = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const handleLogin = async (credentials, setSubmitting) => {
-    const response = await dispatch(login(credentials));
+    try {
+      const response = await dispatch(login(credentials));
 
-    if (!response.payload.success) {
-      console.log(response.payload.message);
+      if (response.payload.success === true) {
+        console.log("oke");
+      } else setMessage("Sai thông tin đăng nhập!");
+      setSubmitting(false);
+    } catch (error) {
+      setMessage("Sai thông tin đăng nhập!");
     }
-    setSubmitting(false);
   };
 
   const handleRegister = () => {
